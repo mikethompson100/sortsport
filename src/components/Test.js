@@ -15,8 +15,15 @@ function Test() {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             let result = await response.json();
-			result = result.teams;
-            setData(result); // Update state with fetched data
+            result = result.teams;
+			const filterByLeagueId = (result, leagueId1, leagueId2) => {
+                return result.filter(function(item) {
+                    return (item.league.id === leagueId1) || (item.league.id === leagueId2);
+                }) 
+              }
+              const filteredData = filterByLeagueId(result, 103, 104);
+              console.log(filteredData);
+            setData(filteredData); // Update state with fetched data
         } catch (err) {
             setError(err.message); // Update state with error message
         } finally {
@@ -35,21 +42,21 @@ function Test() {
             {loading && <p>Loading...</p>} {/* Show loading message */}
             {error && <p>Error: {error}</p>} {/* Show error message */}
             {data && ( /* Render data when available */
-                <div>
-				{Object.keys(data).map(key => (
-					<div key={key}>
-						<p><strong>Team: </strong> {data[key].name}</p>
-  						<p><strong>Venue: </strong> {data[key].venue.name}</p>
-						<p><strong>City: </strong> {data[key].locationName}</p>
-						<hr/>
-					</div>
-				))}
-                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Team:</td>
+                        </tr>
+                        {Object.keys(data).map(key => (
+                        <tr key={key}>
+                            <td>{data[key].name}</td>
+                        </tr>
+                        ))}
+                    </tbody>
+                </table>
             )}
         </div>
     );
 }
-
-//export default DataFetchingComponent;
 
 export default Test;

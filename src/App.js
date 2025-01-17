@@ -1,11 +1,17 @@
 import React from 'react';
-import TestUI from './components/Test';
+import TeamsTable from './components/TeamsTable';
+import {MLB, NFL, NBA, NHL} from './constants/leagueAPI';
+import useTeams from './hooks/useTeams';
+import useStats from './hooks/useStats';
 import './App.css';
+const LEAGUEAPI = MLB;
 
 function App() {
+  const teams = useTeams();
+  const stats = useStats();
   return (
     <div className="App">
-      <TestUI/>
+      <TeamsTable teams={teams} stats={stats} LEAGUEAPI={LEAGUEAPI} />
     </div>
   );
 }

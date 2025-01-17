@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-const MLBStatsAPI = require('mlb-stats-api');
+import { useState, useEffect } from 'react';
+import MLBStatsAPI from 'mlb-stats-api';
 const mlbStats = new MLBStatsAPI();
 
-function Test() {
+function useTeams() {
     const [data, setData] = useState(null); // State to store fetched data
     const [loading, setLoading] = useState(true); // State to manage loading
     const [error, setError] = useState(null); // State to store errors
@@ -22,7 +22,7 @@ function Test() {
                 }) 
               }
               const filteredData = filterByLeagueId(result, 103, 104);
-              console.log(filteredData);
+              //console.log(filteredData);
             setData(filteredData); // Update state with fetched data
         } catch (err) {
             setError(err.message); // Update state with error message
@@ -35,28 +35,8 @@ function Test() {
     useEffect(() => {
         fetchData();
     }, []); // Empty dependency array ensures it runs only once
-
-    // Render the component
-    return (
-        <div>
-            {loading && <p>Loading...</p>} {/* Show loading message */}
-            {error && <p>Error: {error}</p>} {/* Show error message */}
-            {data && ( /* Render data when available */
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>Team:</td>
-                        </tr>
-                        {Object.keys(data).map(key => (
-                        <tr key={key}>
-                            <td>{data[key].name}</td>
-                        </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
-        </div>
-    );
+    const teams = {data, loading, error}
+    return teams;
 }
 
-export default Test;
+export default useTeams;

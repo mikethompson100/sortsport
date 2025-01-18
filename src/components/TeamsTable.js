@@ -12,15 +12,17 @@ function TeamsTable(props) {
                 <table>
                     <tbody>
                         <tr>
+                            <td>Id:</td>
                             <td>Season:</td>
                             <td>Team:</td>
-                            <td>Id:</td>
+                            <td>HRs:</td>
                         </tr>
                         {Object.keys(props.teams.data).map(key => (
                         <tr key={key}>
+                            <td>{props.teams.data[key].id}</td>
                             <td>{props.teams.data[key].season}</td>
                             <td>{props.teams.data[key].name}</td>
-                            <td>{props.teams.data[key].id}</td>
+                            <td>{props.stats.data.stats[0].splits[key].stat.homeRuns}</td>
                         </tr>
                         ))}
                     </tbody>

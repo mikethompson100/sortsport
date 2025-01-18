@@ -21,8 +21,8 @@ function useTeams() {
                     return (item.league.id === leagueId1) || (item.league.id === leagueId2);
                 }) 
               }
-              const filteredData = filterByLeagueId(result, 103, 104);
-              //console.log(filteredData);
+              const filteredData = filterByLeagueId(result, 103, 104); // American and National MLB leagues
+              //console.log("filteredData: ", filteredData);
             setData(filteredData); // Update state with fetched data
         } catch (err) {
             setError(err.message); // Update state with error message

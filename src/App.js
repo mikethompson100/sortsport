@@ -1,6 +1,6 @@
 import React from 'react';
 import TeamsTable from './components/TeamsTable';
-import {MLB, NFL, NBA, NHL} from './constants/leagueAPI';
+import {MLB} from './constants/leagueAPI';
 import useTeams from './hooks/useTeams';
 import useStats from './hooks/useStats';
 import './App.css';

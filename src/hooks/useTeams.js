@@ -22,7 +22,7 @@ function useTeams() {
                 }) 
               }
               const filteredData = filterByLeagueId(result, 103, 104); // American and National MLB leagues
-              //console.log("filteredData: ", filteredData);
+              filteredData.sort((a, b) => b.id - a.id);
             setData(filteredData); // Update state with fetched data
         } catch (err) {
             setError(err.message); // Update state with error message
@@ -39,4 +39,4 @@ function useTeams() {
     return teams;
 }
 
-export default useTeams;
+export default useTeams; 

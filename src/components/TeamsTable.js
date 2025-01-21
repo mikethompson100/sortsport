@@ -22,7 +22,8 @@ function TeamsTable(props) {
                             <td>{props.teams.data[key].id}</td>
                             <td>{props.teams.data[key].season}</td>
                             <td>{props.teams.data[key].name}</td>
-                            <td>{props.stats.data.stats[0].splits[key].stat.homeRuns}</td>
+                            {/* <td>{props.stats.data.stats[0].splits[key].stat.homeRuns}</td> 
+                            <td>{props.stats.data[0].splits[key].stat.homeRuns}</td>*/}
                         </tr>
                         ))}
                     </tbody>

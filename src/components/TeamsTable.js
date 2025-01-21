@@ -16,14 +16,15 @@ function TeamsTable(props) {
                             <td>Season:</td>
                             <td>Team:</td>
                             <td>HRs:</td>
+                            <td>SO:</td>
                         </tr>
                         {Object.keys(props.teams.data).map(key => (
                         <tr key={key}>
                             <td>{props.teams.data[key].id}</td>
                             <td>{props.teams.data[key].season}</td>
                             <td>{props.teams.data[key].name}</td>
-                            {/* <td>{props.stats.data.stats[0].splits[key].stat.homeRuns}</td> 
-                            <td>{props.stats.data[0].splits[key].stat.homeRuns}</td>*/}
+                            <td>{props.stats.data.stats[0].splits[key].stat.homeRuns}</td>
+                            <td>{props.stats.data.stats[0].splits[key].stat.strikeOuts}</td>
                         </tr>
                         ))}
                     </tbody>

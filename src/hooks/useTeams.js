@@ -22,7 +22,8 @@ function useTeams() {
                 }) 
               }
               const filteredData = filterByLeagueId(result, 103, 104); // American and National MLB leagues
-              filteredData.sort((a, b) => b.id - a.id);
+              
+            console.log("Fetched team data sorted by id:  ", filteredData);
             setData(filteredData); // Update state with fetched data
         } catch (err) {
             setError(err.message); // Update state with error message

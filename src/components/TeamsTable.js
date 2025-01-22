@@ -15,8 +15,12 @@ function TeamsTable(props) {
                             <td>Id:</td>
                             <td>Season:</td>
                             <td>Team:</td>
-                            <td>HRs:</td>
-                            <td>SO:</td>
+                            <td><button onClick={() => console.log("HRs button clicked!")}>
+                                HRs:
+                            </button></td>
+                            <td><button onClick={() => console.log("SOs button clicked!")}>
+                                SOs:
+                            </button></td>
                         </tr>
                         {Object.keys(props.teams.data).map(key => (
                         <tr key={key}>

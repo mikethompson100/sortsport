@@ -1,30 +1,22 @@
 import { useState, useEffect } from 'react';
-import MLBStatsAPI from 'mlb-stats-api';
-const mlbStats = new MLBStatsAPI();
+import { MLB_STATS } from '../constants/leagueAPI';
 
 function useTeams() {
     const [data, setData] = useState(null); // State to store fetched data
     const [loading, setLoading] = useState(true); // State to manage loading
     const [error, setError] = useState(null); // State to store errors
 
-    // Define an async function to fetch data
     const fetchData = async () => {
         try {
-            const response = await mlbStats.getTeams(); 
+            const url = `${MLB_STATS}`;
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            let result = await response.json();
-            result = result.teams;
-			const filterByLeagueId = (result, leagueId1, leagueId2) => {
-                return result.filter(function(item) {
-                    return (item.league.id === leagueId1) || (item.league.id === leagueId2);
-                }) 
-              }
-              const filteredData = filterByLeagueId(result, 103, 104); // American and National MLB leagues
-              
-            console.log("Fetched team data sorted by id:  ", filteredData);
-            setData(filteredData); // Update state with fetched data
+            let data = await response.json();
+            const targetData = data.stats[0].splits;
+            
+            setData(targetData); // Update state with fetched data
         } catch (err) {
             setError(err.message); // Update state with error message
         } finally {

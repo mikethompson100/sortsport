@@ -8,7 +8,7 @@ function TeamsTable(props) {
     }
 
     const handleSort = (field) => {
-        // If the user clicks the same sort field, reverse the sort order
+        // If the user clicks the same sort column, reverse the sort order
         setSortedBy(prev => prev === field ? `-${field}` : field);
     };
 
@@ -32,7 +32,6 @@ function TeamsTable(props) {
     // Render the component
     return (
         <div>
-            {props.message}
             {props.statistics.loading && <p>Loading...</p>} {/* Show loading message */}
             {props.statistics.error && <p>Error: {props.statistics.error}</p>} {/* Show error message */}
             {props.statistics.data && ( /* Render data when available */

@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 function TeamsTable(props) {
     const [sortedBy, setSortedBy] = useState("NAME"); // State to store fetched data
+    const [group, setGroup] = useState("pitching");
     if (props.statistics.loading) {
         return <div>Loading...</div>;
     }
@@ -13,7 +14,9 @@ function TeamsTable(props) {
     };
 
     const records = [...props.statistics.data];
-    const sortedRecords = [...records].sort((a, b) => {
+    let sortedRecords = [];
+    if (group === "hitting") {
+    sortedRecords = [...records].sort((a, b) => {
         if (sortedBy === "NAME") return a.team.name > b.team.name ? 1 : -1;
         else if (sortedBy === "-NAME") return a.team.name < b.team.name ? 1 : -1;
         else if (sortedBy === "HR") return a.stat.homeRuns - b.stat.homeRuns;
@@ -37,23 +40,52 @@ function TeamsTable(props) {
         else if (sortedBy === "HIT") return a.stat.rbi - b.stat.rbi;
         else if (sortedBy === "-HIT") return b.stat.rbi - a.stat.rbi;
         return 0; // Default case if no sorting is applied
-    });
+    })
+    }
+    else if (group === "pitching") {
+    sortedRecords = [...records].sort((a, b) => {
+        if (sortedBy === "NAME") return a.team.name > b.team.name ? 1 : -1;
+        else if (sortedBy === "-NAME") return a.team.name < b.team.name ? 1 : -1;
+        else if (sortedBy === "BK") return a.stat.balks - b.stat.balks;
+        else if (sortedBy === "-BK") return b.stat.balks - a.stat.balks;
+       /*  else if (sortedBy === "ABPH") return a.stat.atBatsPerHomeRun - b.stat.atBatsPerHomeRun;
+        else if (sortedBy === "-ABPH") return b.stat.atBatsPerHomeRun - a.stat.atBatsPerHomeRun;
+        else if (sortedBy === "SO") return a.stat.strikeOuts - b.stat.strikeOuts;
+        else if (sortedBy === "-SO") return b.stat.strikeOuts - a.stat.strikeOuts;
+        else if (sortedBy === "GO") return a.stat.groundOuts - b.stat.groundOuts;
+        else if (sortedBy === "-GO") return b.stat.groundOuts - a.stat.groundOuts;
+        else if (sortedBy === "AO") return a.stat.airOuts - b.stat.airOuts;
+        else if (sortedBy === "-AO") return b.stat.airOuts - a.stat.airOuts;
+        else if (sortedBy === "BB") return a.stat.baseOnBalls - b.stat.baseOnBalls;
+        else if (sortedBy === "-BB") return b.stat.baseOnBalls - a.stat.baseOnBalls;
+        else if (sortedBy === "AVG") return a.stat.avg - b.stat.avg;
+        else if (sortedBy === "-AVG") return b.stat.avg - a.stat.avg;
+        else if (sortedBy === "GIDP") return a.stat.groundIntoDoublePlay - b.stat.groundIntoDoublePlay;
+        else if (sortedBy === "-GIDP") return b.stat.groundIntoDoublePlay - a.stat.groundIntoDoublePlay;
+        else if (sortedBy === "RBI") return a.stat.rbi - b.stat.rbi;
+        else if (sortedBy === "-RBI") return b.stat.rbi - a.stat.rbi;
+        else if (sortedBy === "HIT") return a.stat.rbi - b.stat.rbi;
+        else if (sortedBy === "-HIT") return b.stat.rbi - a.stat.rbi; */
+        return 0; // Default case if no sorting is applied
+    })
+    }
 
     // Render the component
     return (
         <div>
             {props.statistics.loading && <p>Loading...</p>} {/* Show loading message */}
             {props.statistics.error && <p>Error: {props.statistics.error}</p>} {/* Show error message */}
-            {props.statistics.data && ( /* Render data when available */
+            {props.statistics.data && (group === "hitting") && ( /* Render data when available */
                 <table>
                     <tbody>
                         <tr>
-                            <td>Season:</td>
-                            <td class="left">Team:</td>
+                        <td>{props.statistics.data[0].season}</td></tr>
+                        <tr>
+                            <td className="left">Team:</td>
                             <td><button onClick={() => handleSort('AVG')} title="Batting Average">AVG:</button></td>
                             <td><button onClick={() => handleSort('HIT')} title="Hits">Hits:</button></td>
                             <td><button onClick={() => handleSort('HR')} title="Homeruns">HRs:</button></td>
-                            <td><button onClick={() => handleSort('RBI')} title="Homeruns">RBIs:</button></td>
+                            <td><button onClick={() => handleSort('RBI')} title="Runs batted in">RBIs:</button></td>
                             <td><button onClick={() => handleSort('ABPH')} title="At Bats per Homerun">AB/PHr:</button></td>
                             <td><button onClick={() => handleSort('BB')} title="Walks">Walks:</button></td>
                             <td><button onClick={() => handleSort('SO')} title="Strikeouts">SOs:</button></td>
@@ -63,8 +95,7 @@ function TeamsTable(props) {
                         </tr>
                         {sortedRecords.map(record => (
                             <tr key={record.team.id}>
-                                <td>{record.season}</td>
-                                <td class="left">{record.team.name}</td>
+                                <td className="left">{record.team.name}</td>
                                 <td>{record.stat.avg}</td>
                                 <td>{record.stat.hits}</td>
                                 <td>{record.stat.homeRuns}</td>
@@ -75,6 +106,24 @@ function TeamsTable(props) {
                                 <td>{record.stat.groundOuts}</td>
                                 <td>{record.stat.airOuts}</td>
                                 <td>{record.stat.groundIntoDoublePlay}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+            {props.statistics.data && (group === "pitching") && ( /* Render data when available */
+                <table>
+                    <tbody>
+                        <tr>
+                        <td>{props.statistics.data[0].season}</td></tr>
+                        <tr>
+                            <td className="left">Team:</td>
+                            <td><button onClick={() => handleSort('BK')} title="Balks">Balks:</button></td>
+                        </tr>
+                        {sortedRecords.map(record => (
+                            <tr key={record.team.id}>
+                                <td className="left">{record.team.name}</td>
+                                <td>{record.stat.balks}</td>
                             </tr>
                         ))}
                     </tbody>

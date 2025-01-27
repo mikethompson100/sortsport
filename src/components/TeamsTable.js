@@ -48,7 +48,7 @@ function TeamsTable(props) {
         else if (sortedBy === "-NAME") return a.team.name < b.team.name ? 1 : -1;
         else if (sortedBy === "BK") return a.stat.balks - b.stat.balks;
         else if (sortedBy === "-BK") return b.stat.balks - a.stat.balks;
-       /*  else if (sortedBy === "ABPH") return a.stat.atBatsPerHomeRun - b.stat.atBatsPerHomeRun;
+        else if (sortedBy === "ABPH") return a.stat.atBatsPerHomeRun - b.stat.atBatsPerHomeRun;
         else if (sortedBy === "-ABPH") return b.stat.atBatsPerHomeRun - a.stat.atBatsPerHomeRun;
         else if (sortedBy === "SO") return a.stat.strikeOuts - b.stat.strikeOuts;
         else if (sortedBy === "-SO") return b.stat.strikeOuts - a.stat.strikeOuts;
@@ -65,7 +65,7 @@ function TeamsTable(props) {
         else if (sortedBy === "RBI") return a.stat.rbi - b.stat.rbi;
         else if (sortedBy === "-RBI") return b.stat.rbi - a.stat.rbi;
         else if (sortedBy === "HIT") return a.stat.rbi - b.stat.rbi;
-        else if (sortedBy === "-HIT") return b.stat.rbi - a.stat.rbi; */
+        else if (sortedBy === "-HIT") return b.stat.rbi - a.stat.rbi;
         return 0; // Default case if no sorting is applied
     })
     }
@@ -73,6 +73,7 @@ function TeamsTable(props) {
     // Render the component
     return (
         <div>
+            <button id="batting" className="inactiveButton">Batting</button> <button id="pitching" className="activeButton">Pitching</button><br/><br/>
             {props.statistics.loading && <p>Loading...</p>} {/* Show loading message */}
             {props.statistics.error && <p>Error: {props.statistics.error}</p>} {/* Show error message */}
             {props.statistics.data && (group === "hitting") && ( /* Render data when available */

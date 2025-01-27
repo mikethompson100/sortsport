@@ -2,6 +2,7 @@ table {border-collapse: collapse;}
 
 .App {
   text-align: left;
+  padding: 5px;
 }
 
 .App-logo {
@@ -26,3 +27,15 @@ table {border-collapse: collapse;}
 
 td { border: 1px solid #000; padding: 3px 5px; text-align: center; }
 td.left { text-align: left; }
+
+#batting, #pitching { font-size: 1.1rem; border-radius: 5px; }
+.activeButton {
+  background-color: green;
+  color: white;
+  font-weight: bold;
+}
+.inactiveButton {
+  opacity: .5;
+  color: #000;
+}
+

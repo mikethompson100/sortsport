@@ -1,15 +1,14 @@
 import React from 'react';
 import TeamsTable from './components/TeamsTable';
-import {MLB_root} from './constants/leagueAPI';
 import useData from './hooks/useData';
 import './App.css';
-const LEAGUEAPI = MLB_root;
 
 function App() {
-  const statistics = useData();
+  console.log("render app");
+  const result = useData();
   return (
     <div className="App">
-      <TeamsTable statistics={statistics} LEAGUEAPI={LEAGUEAPI} />
+      <TeamsTable result={result} />
     </div>
   );
 }

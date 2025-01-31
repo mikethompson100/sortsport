@@ -2,9 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 
 function TeamsTable(props) {
+    console.log("props.result:", props.result);
     const [sortedBy, setSortedBy] = useState("NAME"); // State to store fetched data
     const [group, setGroup] = useState("hitting");
-    if (props.statistics.loading) {
+    if (props.result.loading) {
         return <div>Loading...</div>;
     }
 
@@ -13,7 +14,15 @@ function TeamsTable(props) {
         setSortedBy(prev => prev === field ? `-${field}` : field);
     };
 
-    const records = [...props.statistics.data];
+    let records = {};
+    if (group === "hitting") {
+        records = props.result.data.hitting.stats[0].splits;
+    }
+    else if (group === "pitching") {
+        records = props.result.data.pitching.stats[0].splits;
+    }
+    console.log("RECORDS: ", records);
+
     let sortedRecords = [];
     if (group === "hitting") {
         sortedRecords = [...records].sort((a, b) => {
@@ -81,13 +90,18 @@ function TeamsTable(props) {
     // Render the component
     return (
         <div>
-            {props.statistics.loading && <p>Loading...</p>} {/* Show loading message */}
-            {props.statistics.error && <p>Error: {props.statistics.error}</p>} {/* Show error message */}
-            {props.statistics.data && (group === "hitting") && ( /* Render data when available */
+            {props.result.loading && <p>Loading...</p>} {/* Show loading message */}
+            {props.result.error && <p>Error: {props.result.error}</p>} {/* Show error message */}
+            {props.result.data && (group === "hitting") && ( /* Render data when available */
                 <table>
                     <tbody>
                         <tr>
-                            <td className="fixed">{props.statistics.data[0].season}<br/><button className="inactiveButton">Batting</button> <button className="activeButton">Pitching</button></td></tr>
+                            <td className="fixed">
+                                <div>{records[0].season}</div>
+                                <button onClick={() => setGroup("hitting")} className="active">Batting</button>
+                                <button onClick={() => setGroup("pitching")} className="active">Pitching</button>
+                            </td>
+                        </tr>
                         <tr>
                             <td className="left">Team:</td>
                             <td><button onClick={() => handleSort('AVG')} title="Batting Average">AVG:</button></td>
@@ -119,11 +133,16 @@ function TeamsTable(props) {
                     </tbody>
                 </table>
             )}
-            {props.statistics.data && (group === "pitching") && ( /* Render data when available */
+            {props.result.data && (group === "pitching") && ( /* Render data when available */
                 <table>
                     <tbody>
                         <tr>
-                            <td className="fixed">{props.statistics.data[0].season}<br/><button className="inactiveButton">Batting</button> <button className="activeButton">Pitching</button></td></tr>
+                            <td className="fixed">
+                                <div>{records[0].season}</div>
+                                <button onClick={() => setGroup("hitting")} className="active">Batting</button>
+                                <button onClick={() => setGroup("pitching")} className="active">Pitching</button>
+                            </td>
+                        </tr>
                         <tr>
                             <td className="left">Team:</td>
                             <td><button onClick={() => handleSort('ERA')} title="Earned Run Average">ERA:</button></td>

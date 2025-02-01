@@ -157,7 +157,7 @@ function TeamsTable(props) {
                 <table>
                     <tbody>
                         <tr>
-                            <td className="left">Team:</td>
+                            <td className="team">Team:</td>
                             <td className="top"><button onClick={() => handleSort('ERA')} title="Earned Run Average">ERA:</button></td>
                             <td className="top"><button onClick={() => handleSort('R')} title="Runs">Runs:</button></td>
                             <td className="top"><button onClick={() => handleSort('HR')} title="Homeruns">HRs:</button></td>

@@ -4,7 +4,6 @@ import useData from './hooks/useData';
 import './App.css';
 
 function App() {
-  console.log("render app");
   const result = useData();
   return (
     <div className="App">

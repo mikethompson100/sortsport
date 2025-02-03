@@ -82,3 +82,31 @@ td.top {
   margin: 3px 0;
 }
 
+.topRank1 {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+.topRank2to5 {
+  background-color: orange;
+  color: black;
+  font-weight: bold;
+}
+.topRank6to10 {
+  background-color: yellow;
+}
+
+
+.botRank6to10 {
+  background-color: cyan;
+}
+.botRank2to5 {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+}
+.botRank1 {
+  background-color: navy;
+  color: white;
+  font-weight: bold;
+}

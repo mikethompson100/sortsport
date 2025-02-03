@@ -14,6 +14,7 @@ function useData() {
             ];
             const [hitting, pitching] = await Promise.all(urls.map(url => fetch(url).then(res => res.json())));
             const totalStats = { hitting, pitching };
+            console.log(totalStats);
             setData(totalStats);
         }
         catch (error) {

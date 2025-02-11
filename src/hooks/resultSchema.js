@@ -13,6 +13,15 @@
                 id: number,
                 name: string
               }
+            },           
+            {
+              stat: {
+                homeRuns: number
+              },
+              team: {
+                id: number,
+                name: string
+              }
             }
           ]
         }

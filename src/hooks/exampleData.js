@@ -16,7 +16,7 @@ const example = [
         rank: number
       }
     },
-    season: string
+    season: number
   },
   {
     team: {

@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 
 function TeamsTable(props) {
-    const [sortedBy, setSortedBy] = useState("NAME"); // State to set by which column the data is sorted
-    const [group, setGroup] = useState("pitching");  // State to set by which group data will be shown in the table (hitting/pitching)
+    const [sortedBy, setSortedBy] = useState(null); // State to set by which column the data is sorted
+    const [group, setGroup] = useState("hitting");  // State to set by which group data will be shown in the table (hitting/pitching)
     if (props.result.loading) {
         return <div>Loading...</div>;
     }
@@ -11,11 +11,26 @@ function TeamsTable(props) {
     const handleSort = (field) => {
         // If the user clicks the same sort column, reverse the sort order
         setSortedBy(prev => prev === field ? `-${field}` : field);
-    };
-console.log("props.result.data:", props.result.data);
-    let sortedRecords = [];
-     if (group === "hitting") {
-        sortedRecords = props.result.data.sort((a, b) => {
+    };  
+  
+    const teamsArray = props.result.data;
+    console.log("initialArray from useData:", teamsArray);
+
+/*     function sortTeams(teamsArray, category, stat, ascending = true) {
+        teamsArray.sort((a, b) => {
+            const aValue = a[category]?.[stat]?.value ?? 0; // Default to 0 if missing
+            const bValue = b[category]?.[stat]?.value ?? 0;
+            return ascending ? aValue - bValue : bValue - aValue;
+        });
+        return teamsArray;
+    }
+    
+    const z = sortTeams(teamsArray, group, "stolenBases", true);
+    console.log(`teams sorted by stolenBases: `, z); */
+
+ /*
+      if (group === "hitting") {
+        sortedRecords = [props.result.data.sort((a, b) => {
             if (sortedBy === "NAME") return a.team.name > b.team.name ? 1 : -1;
             else if (sortedBy === "-NAME") return a.team.name < b.team.name ? 1 : -1;
             else if (sortedBy === "RUNS") return a.hitting.runs.value - b.hitting.runs.value;
@@ -83,9 +98,11 @@ console.log("props.result.data:", props.result.data);
             else if (sortedBy === "-GIDP") return b.pitching.groundIntoDoublePlay.value - a.pitching.groundIntoDoublePlay.value;
             return 0; // Default case if no sorting is applied
         })
-    } 
+      } 
+     }*/
 
-    const renderArray = [...sortedRecords];
+    const renderArray = [...teamsArray];
+    //console.log("renderArray: ", renderArray);
 
     // Render the component
     return (

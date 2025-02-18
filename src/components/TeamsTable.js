@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 
 function TeamsTable(props) {
-    const [sortedBy, setSortedBy] = useState(null); // State to set by which column the data is sorted
+    const [sortedBy, setSortedBy] = useState("doubles"); // State to set by which column the data is sorted
     const [group, setGroup] = useState("hitting");  // State to set by which group data will be shown in the table (hitting/pitching)
     if (props.result.loading) {
         return <div>Loading...</div>;
@@ -14,9 +14,8 @@ function TeamsTable(props) {
     };  
   
     const teamsArray = props.result.data;
-    console.log("initialArray from useData:", teamsArray);
 
-/*     function sortTeams(teamsArray, category, stat, ascending = true) {
+     function sortTeams(teamsArray, category, stat, ascending = true) {
         teamsArray.sort((a, b) => {
             const aValue = a[category]?.[stat]?.value ?? 0; // Default to 0 if missing
             const bValue = b[category]?.[stat]?.value ?? 0;
@@ -24,9 +23,11 @@ function TeamsTable(props) {
         });
         return teamsArray;
     }
-    
-    const z = sortTeams(teamsArray, group, "stolenBases", true);
-    console.log(`teams sorted by stolenBases: `, z); */
+    console.log("teamsArray:", teamsArray);
+    console.log("group:", group);
+    console.log("sortedBy:", sortedBy);
+    const sortedRecords = sortTeams(teamsArray, group, sortedBy, true);
+    console.log(`teams sorted by current setSorted state value: `, sortedRecords); 
 
  /*
       if (group === "hitting") {
@@ -101,7 +102,7 @@ function TeamsTable(props) {
       } 
      }*/
 
-    const renderArray = [...teamsArray];
+    const renderArray = [...sortedRecords];
     //console.log("renderArray: ", renderArray);
 
     // Render the component

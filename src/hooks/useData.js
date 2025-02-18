@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MLB_STATS_HITTING, MLB_STATS_PITCHING } from '../constants/leagueAPI';
+import useRanking from './useRanking';
 
 /*
 const getData = () => {
@@ -77,6 +78,8 @@ function useData() {
         fetchData();
     }, []); // Empty dependency array ensures it runs only once
 
+    const rankedData = useRanking(data);
+    setData(rankedData);
     const result = { data, loading, error }
 
     return result;

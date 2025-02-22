@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { MLB_STATS_HITTING, MLB_STATS_PITCHING } from '../constants/leagueAPI';
-import useRanking from './useRanking';
+import rankStats from '../helper/rankStats';
+import hitting from '../data/hitting.json';
+import pitching from '../data/pitching.json';
 
 /*
 const getData = () => {
@@ -24,14 +26,14 @@ function useData() {
                 MLB_STATS_HITTING,
                 MLB_STATS_PITCHING
             ];
-            const [hitting, pitching] = await Promise.all(urls.map(
-                async (url) => {
-                    // Step 1: Download the data
-                    const response = await fetch(url);
-                    // Step 2: Parse the data
-                    return await response.json();
-                }
-            ));
+            /*             const [hitting, pitching] = await Promise.all(urls.map(
+                            async (url) => {
+                                // Step 1: Download the data
+                                const response = await fetch(url);
+                                // Step 2: Parse the data
+                                return await response.json();
+                            }
+                        )); */
 
             // Syncing both hitting and pitching to be sorted by team name
             hitting.stats[0].splits.sort((a, b) => a.team.name.localeCompare(b.team.name));
@@ -58,11 +60,9 @@ function useData() {
                 team.team = hittingSplit.team;
                 return team
             })
-
-            // Sorting array by team.name to prepare data for first render (Outer team array)
             teamsArray.sort((a, b) => a.team.name.localeCompare(b.team.name));
-
-            setData(teamsArray);
+            const rankedData = rankStats(teamsArray);
+            setData(rankedData);
         }
         catch (error) {
             console.error("Error fetching data:", error);
@@ -75,13 +75,10 @@ function useData() {
 
     // Use useEffect to call fetchData on component mount
     useEffect(() => {
-        fetchData();
+        fetchData(); // Sets state
     }, []); // Empty dependency array ensures it runs only once
 
-    const rankedData = useRanking(data);
-    setData(rankedData);
     const result = { data, loading, error }
-
     return result;
 }
 

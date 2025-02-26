@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import StatCell from './StatCell';
 
 function TeamsTable(props) {
   const [sortedBy, setSortedBy] = useState("doubles"); // State to set by which column the data is sorted
@@ -207,7 +208,9 @@ function TeamsTable(props) {
               return (
                 <tr key={record.team.id}>
                   <td className="left">{record.team.name}</td>
-                  <td className={runsClass}>{record.hitting.runs.value}</td>
+
+                  <StatCell nameForClass={runsClass} tdValue={record.hitting.runs.value}/>
+                  
                   <td className={hitsClass}>{record.hitting.hits.value}</td>
                   <td className={doublesClass}>{record.hitting.doubles.value}</td>
                   <td className={triplesClass}>{record.hitting.triples.value}</td>

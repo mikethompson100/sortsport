@@ -1,6 +1,10 @@
-// return a single td , call getStatClass here
-/*                  <td className={homeRunsClass}>
-{record.hitting.homeRuns.value}
-</td>
- */
-/* Coming soon */
+import React from 'react';
+
+function StatCell(props) {
+  return (
+    <td className={props.nameForClass}>{props.tdValue}</td>
+  )
+}
+
+export default StatCell;
+

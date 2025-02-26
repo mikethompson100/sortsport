@@ -189,7 +189,7 @@ function TeamsTable(props) {
             {renderArray.map(record => {
               // Object.values(record.hitting) array of all the stats
               // map array runs hits doubles triples 
-              //const stats = Object.values(record.hitting);
+              //const stats = Object.values(record.hitting); 
               const runsClass = getStatClass(record.hitting.runs.rank);
               const hitsClass = getStatClass(record.hitting.hits.rank);
               const doublesClass = getStatClass(record.hitting.doubles.rank);

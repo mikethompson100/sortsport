@@ -1,10 +1,9 @@
 import React from 'react';
+import getStatClass from '../helper/getStatClass';
 
-function StatCell(props) {
-  return (
-    <td className={props.nameForClass}>{props.tdValue}</td>
-  )
-}
+const StatCell = ({ stats, column }) => {
+  const nameForClass = getStatClass(stats[column.name].rank, column.order);
+  return ( <td className={nameForClass}>{stats[column.name].value}</td> )
+};
 
 export default StatCell;
-

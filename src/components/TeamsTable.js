@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import StatCell from './StatCell';
+import getStatClass from '../helper/getStatClass';
 
 function TeamsTable(props) {
   const [sortedBy, setSortedBy] = useState("doubles"); // State to set by which column the data is sorted
@@ -14,44 +15,6 @@ function TeamsTable(props) {
     setSortedBy(prev => prev === field ? `-${field}` : field);
   };
 
-  function getStatClass(rank, order = "desc") {
-    if (order === "desc") {
-      switch (true) {
-        case rank === 1:
-          return 'topRank1';
-        case (rank >= 2 && rank <= 5):
-          return 'topRank2to5';
-        case (rank >= 6 && rank <= 10):
-          return 'topRank6to10';
-        case (rank >= 20 && rank <= 24):
-          return 'botRank6to10';
-        case (rank >= 25 && rank <= 29):
-          return 'botRank2to5';
-        case (rank === 30):
-          return 'botRank1';
-        default: return
-      }
-    }
-    else if (order === "asc") {
-      switch (true) {
-        case rank === 1:
-          return 'botRank1';
-        case (rank >= 2 && rank <= 5):
-          return 'botRank2to5';
-        case (rank >= 6 && rank <= 10):
-          return 'botRank6to10';
-        case (rank >= 20 && rank <= 24):
-          return 'topRank6to10';
-        case (rank >= 25 && rank <= 29):
-          return 'topRank2to5';
-        case (rank === 30):
-          return 'topRank1';
-        default: return
-      }
-    }
-    else throw new Error("The order is invalid");
-  };
-
   const teamsArray = props.result.data;
 
   function sortTeamDataByColumn(teamsArray, category, columnName) {
@@ -62,8 +25,6 @@ function TeamsTable(props) {
         else if (columnName === "-NAME") return a.team.name < b.team.name ? 1 : -1;
         else if (columnName === "RUNS") return a.hitting.runs.value - b.hitting.runs.value;
         else if (columnName === "-RUNS") return b.hitting.runs.value - a.hitting.runs.value;
-        else if (columnName === "HR") return a.hitting.homeRuns.value - b.hitting.homeRuns.value;
-        else if (columnName === "-HR") return b.hitting.homeRuns.value - a.hitting.homeRuns.value;
         else if (columnName === "HIT") return a.hitting.hits.value - b.hitting.hits.value;
         else if (columnName === "-HIT") return b.hitting.hits.value - a.hitting.hits.value;
         else if (columnName === "2B") return a.hitting.doubles.value - b.hitting.doubles.value;
@@ -188,42 +149,36 @@ function TeamsTable(props) {
               <td className="top"><button onClick={() => handleSort('GIDP')} title="Ground into Double Play">*GIDP:</button></td>
             </tr>
             {renderArray.map(record => {
-              // Object.values(record.hitting) array of all the stats
-              // map array runs hits doubles triples 
-              //const stats = Object.values(record.hitting); 
-              const runsClass = getStatClass(record.hitting.runs.rank);
-              const hitsClass = getStatClass(record.hitting.hits.rank);
-              const doublesClass = getStatClass(record.hitting.doubles.rank);
-              const triplesClass = getStatClass(record.hitting.triples.rank);
-              const homeRunsClass = getStatClass(record.hitting.homeRuns.rank);
-              const rbiClass = getStatClass(record.hitting.rbi.rank);
-              const atBatsPerHomeRunClass = getStatClass(record.hitting.atBatsPerHomeRun.rank, "asc");
-              const baseOnBallsClass = getStatClass(record.hitting.baseOnBalls.rank);
-              const stolenBasesClass = getStatClass(record.hitting.stolenBases.rank);
-              const avgClass = getStatClass(record.hitting.avg.rank);
-              const strikeOutsClass = getStatClass(record.hitting.strikeOuts.rank, "asc");
-              const groundOutsClass = getStatClass(record.hitting.groundOuts.rank, "asc");
-              const airOutsClass = getStatClass(record.hitting.airOuts.rank, "asc");
-              const groundIntoDoublePlayClass = getStatClass(record.hitting.groundIntoDoublePlay.rank, "asc");
+
+              const allHittingColumns = [
+                { name: "runs", order: "desc" },
+                { name: "hits", order: "desc" },
+                { name: "doubles", order: "desc" },
+                { name: "triples", order: "desc" },
+                { name: "homeRuns", order: "desc" },
+                { name: "rbi", order: "desc" },
+                { name: "atBatsPerHomeRun", order: "asc" },
+                { name: "baseOnBalls", order: "desc" },
+                { name: "stolenBases", order: "desc" },
+                { name: "avg", order: "desc" },
+                { name: "strikeOuts", order: "asc" },
+                { name: "groundOuts", order: "asc" },
+                { name: "airOuts", order: "asc" },
+                { name: "groundIntoDoublePlay", order: "asc" }
+              ];
+
               return (
                 <tr key={record.team.id}>
                   <td className="left">{record.team.name}</td>
-
-                  <StatCell nameForClass={runsClass} tdValue={record.hitting.runs.value}/>
-                  
-                  <td className={hitsClass}>{record.hitting.hits.value}</td>
-                  <td className={doublesClass}>{record.hitting.doubles.value}</td>
-                  <td className={triplesClass}>{record.hitting.triples.value}</td>
-                  <td className={homeRunsClass}>{record.hitting.homeRuns.value}</td>
-                  <td className={rbiClass}>{record.hitting.rbi.value}</td>
-                  <td className={atBatsPerHomeRunClass}>{record.hitting.atBatsPerHomeRun.value}</td>
-                  <td className={baseOnBallsClass}>{record.hitting.baseOnBalls.value}</td>
-                  <td className={stolenBasesClass}>{record.hitting.stolenBases.value}</td>
-                  <td className={avgClass}>{record.hitting.avg.value}</td>
-                  <td className={strikeOutsClass}>{record.hitting.strikeOuts.value}</td>
-                  <td className={groundOutsClass}>{record.hitting.groundOuts.value}</td>
-                  <td className={airOutsClass}>{record.hitting.airOuts.value}</td>
-                  <td className={groundIntoDoublePlayClass}>{record.hitting.groundIntoDoublePlay.value}</td>
+                  {allHittingColumns.map((column) => {
+                    return (
+                      <StatCell
+                        key={column.name}
+                        stats={record.hitting}
+                        column={column}
+                      />
+                    )
+                  })}
                 </tr>
               )
 
@@ -266,10 +221,29 @@ function TeamsTable(props) {
               const caughtStealingClass = getStatClass(record.pitching.caughtStealing.rank);
               const stolenBasePercentageClass = getStatClass(record.pitching.stolenBasePercentage.rank);
               const groundIntoDoublePlayClass = getStatClass(record.pitching.groundIntoDoublePlay.rank);
+
+              const allPitchingColumns = [
+                "era", "runs", "homeRuns", "strikeOuts", "baseOnBalls", "strikeoutWalkRatio", "groundOuts", "airOuts", "groundOutsToAirouts", "avg", "stolenBases", "caughtStealing", "stolenBasePercentage", "groundIntoDoublePlay"
+              ];
+
               return (
                 <tr key={record.team.id}>
                   <td className="left">{record.team.name}</td>
-                  <td className={eraClass}>{record.pitching.era.value}</td>
+                  <StatCell nameForClass={eraClass} tdValue={record.pitching[allPitchingColumns[0]].value} />
+                  <StatCell nameForClass={runsClass} tdValue={record.pitching[allPitchingColumns[1]].value} />
+                  <StatCell nameForClass={homeRunsClass} tdValue={record.pitching[allPitchingColumns[2]].value} />
+                  <StatCell nameForClass={strikeOutsClass} tdValue={record.pitching[allPitchingColumns[3]].value} />
+                  <StatCell nameForClass={baseOnBallsClass} tdValue={record.pitching[allPitchingColumns[4]].value} />
+                  <StatCell nameForClass={strikeoutWalkRatioClass} tdValue={record.pitching[allPitchingColumns[5]].value} />
+                  <StatCell nameForClass={groundOutsClass} tdValue={record.pitching[allPitchingColumns[6]].value} />
+                  <StatCell nameForClass={airOutsClass} tdValue={record.pitching[allPitchingColumns[7]].value} />
+                  <StatCell nameForClass={groundOutsToAiroutsClass} tdValue={record.pitching[allPitchingColumns[8]].value} />
+                  <StatCell nameForClass={avgClass} tdValue={record.pitching[allPitchingColumns[9]].value} />
+                  <StatCell nameForClass={stolenBasesClass} tdValue={record.pitching[allPitchingColumns[10]].value} />
+                  <StatCell nameForClass={caughtStealingClass} tdValue={record.pitching[allPitchingColumns[11]].value} />
+                  <StatCell nameForClass={stolenBasePercentageClass} tdValue={record.pitching[allPitchingColumns[12]].value} />
+                  <StatCell nameForClass={groundIntoDoublePlayClass} tdValue={record.pitching[allPitchingColumns[13]].value} />
+                  {/*                   <td className={eraClass}>{record.pitching.era.value}</td>
                   <td className={runsClass}>{record.pitching.runs.value}</td>
                   <td className={homeRunsClass}>{record.pitching.homeRuns.value}</td>
                   <td className={strikeOutsClass}>{record.pitching.strikeOuts.value}</td>
@@ -282,7 +256,7 @@ function TeamsTable(props) {
                   <td className={stolenBasesClass}>{record.pitching.stolenBases.value}</td>
                   <td className={caughtStealingClass}>{record.pitching.caughtStealing.value}</td>
                   <td className={stolenBasePercentageClass}>{record.pitching.stolenBasePercentage.value}</td>
-                  <td className={groundIntoDoublePlayClass}>{record.pitching.groundIntoDoublePlay.value}</td>
+                  <td className={groundIntoDoublePlayClass}>{record.pitching.groundIntoDoublePlay.value}</td> */}
                 </tr>
               )
             })}

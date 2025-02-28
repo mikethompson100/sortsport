@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MLB_STATS_HITTING, MLB_STATS_PITCHING } from '../constants/leagueAPI';
+//import { MLB_STATS_HITTING, MLB_STATS_PITCHING } from '../constants/leagueAPI';
 import rankStats from '../helper/rankStats';
 import hitting from '../data/hitting.json';
 import pitching from '../data/pitching.json';
@@ -22,11 +22,11 @@ function useData() {
 
     const fetchData = async () => {
         try {
-            const urls = [
+            /* const urls = [
                 MLB_STATS_HITTING,
                 MLB_STATS_PITCHING
             ];
-            /*             const [hitting, pitching] = await Promise.all(urls.map(
+                        const [hitting, pitching] = await Promise.all(urls.map(
                             async (url) => {
                                 // Step 1: Download the data
                                 const response = await fetch(url);
@@ -79,6 +79,7 @@ function useData() {
     }, []); // Empty dependency array ensures it runs only once
 
     const result = { data, loading, error }
+    
     return result;
 }
 

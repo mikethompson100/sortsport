@@ -44,6 +44,14 @@ td.top {
   border: none;
 }
 
+td.top.active {
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  margin: 3px 0;
+  border: 1px solid #000;
+}
+
 .parent {
   position: fixed;
   top: 0;
@@ -76,6 +84,7 @@ td.top {
   color: white;
   font-weight: bold;
   margin: 3px 0;
+  border: 1px solid #000;
 }
 .inactive {
   opacity: .5;

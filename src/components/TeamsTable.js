@@ -3,33 +3,26 @@ import { useState } from 'react';
 import StatCell from './StatCell';
 
 function TeamsTable(props) {
-  const [sortedBy, setSortedBy] = useState("doubles"); // State to set by which column the data is sorted
+  const [sortedBy, setSortedBy] = useState("-RUNS"); // State to set by which column the data is sorted
   const [group, setGroup] = useState("hitting");  // State to set by which group data will be shown in the table (hitting/pitching)
 
   if (props.result.loading) {
     return <div>Loading...</div>;
   }
 
-/* 
-  
-    console.log("event.target.innerHTML:", event.target.innerHTML);
-    const button = event.target;
-    const parent = button.closest('td');
-    const grandParent = parent.parentNode;
-    const allButtons = grandParent.querySelectorAll('td');
-    allButtons.forEach(btn => btn.classList.remove('active'));
-
-    parent.classList.add('active'); // Add active class to column that is currently being sorted
- */
-
   const sortingColumn = (field, event) => { 
     // Reset columns
     const allButtons = document.querySelectorAll('.columnHeadings td');
     allButtons.forEach(btn => btn.classList.remove('active')); // Remove all active classes from columns
     event.target.parentElement.classList.add('active'); // Add active class to column currently being sorted
+
+   /*  const allArrows = document.querySelectorAll('.columnHeadings td button span');
+    allArrows.forEach(arrow => arrow.remove());
+
+    const span = document.createElement('span');
+    (order === "desc") ? span.className = 'bi bi-chevron-down' : span.className = 'bi bi-chevron-up';
+    event.target.append(span); // Append the span element to the target */
     
-
-
     // If the user clicks the same sort column, reverse the sort order
     setSortedBy(prev => prev === field ? `-${field}` : field);
   };
@@ -54,22 +47,22 @@ function TeamsTable(props) {
         else if (columnName === "-HR") return b.hitting.homeRuns.value - a.hitting.homeRuns.value;
         else if (columnName === "RBI") return a.hitting.rbi.value - b.hitting.rbi.value;
         else if (columnName === "-RBI") return b.hitting.rbi.value - a.hitting.rbi.value;
-        else if (columnName === "ABPH") return a.hitting.atBatsPerHomeRun.value - b.hitting.atBatsPerHomeRun.value;
-        else if (columnName === "-ABPH") return b.hitting.atBatsPerHomeRun.value - a.hitting.atBatsPerHomeRun.value;
+        else if (columnName === "ABPH") return b.hitting.atBatsPerHomeRun.value - a.hitting.atBatsPerHomeRun.value;
+        else if (columnName === "-ABPH") return a.hitting.atBatsPerHomeRun.value - b.hitting.atBatsPerHomeRun.value;
         else if (columnName === "BB") return a.hitting.baseOnBalls.value - b.hitting.baseOnBalls.value;
         else if (columnName === "-BB") return b.hitting.baseOnBalls.value - a.hitting.baseOnBalls.value;
-        else if (columnName === "SO") return a.hitting.strikeOuts.value - b.hitting.strikeOuts.value;
-        else if (columnName === "-SO") return b.hitting.strikeOuts.value - a.hitting.strikeOuts.value;
         else if (columnName === "SB") return a.hitting.stolenBases.value - b.hitting.stolenBases.value;
         else if (columnName === "-SB") return b.hitting.stolenBases.value - a.hitting.stolenBases.value;
         else if (columnName === "AVG") return a.hitting.avg.value - b.hitting.avg.value;
         else if (columnName === "-AVG") return b.hitting.avg.value - a.hitting.avg.value;
-        else if (columnName === "GO") return a.hitting.groundOuts.value - b.hitting.groundOuts.value;
-        else if (columnName === "-GO") return b.hitting.groundOuts.value - a.hitting.groundOuts.value;
-        else if (columnName === "AO") return a.hitting.airOuts.value - b.hitting.airOuts.value;
-        else if (columnName === "-AO") return b.hitting.airOuts.value - a.hitting.airOuts.value;
-        else if (columnName === "GIDP") return a.hitting.groundIntoDoublePlay.value - b.hitting.groundIntoDoublePlay.value;
-        else if (columnName === "-GIDP") return b.hitting.groundIntoDoublePlay.value - a.hitting.groundIntoDoublePlay.value;
+        else if (columnName === "SO") return b.hitting.strikeOuts.value - a.hitting.strikeOuts.value;
+        else if (columnName === "-SO") return a.hitting.strikeOuts.value - b.hitting.strikeOuts.value;
+        else if (columnName === "GO") return b.hitting.groundOuts.value - a.hitting.groundOuts.value;
+        else if (columnName === "-GO") return a.hitting.groundOuts.value - b.hitting.groundOuts.value;
+        else if (columnName === "AO") return b.hitting.airOuts.value - a.hitting.airOuts.value;
+        else if (columnName === "-AO") return a.hitting.airOuts.value - b.hitting.airOuts.value;
+        else if (columnName === "GIDP") return b.hitting.groundIntoDoublePlay.value - a.hitting.groundIntoDoublePlay.value;
+        else if (columnName === "-GIDP") return a.hitting.groundIntoDoublePlay.value - b.hitting.groundIntoDoublePlay.value;
         return 0; // Default case if no sorting is applied
       });
     }
@@ -77,16 +70,16 @@ function TeamsTable(props) {
       sortedRecords = props.result.data.sort((b, a) => {
         if (columnName === "NAME") return a.team.name > b.team.name ? 1 : -1;
         else if (columnName === "-NAME") return a.team.name < b.team.name ? 1 : -1;
-        else if (columnName === "ERA") return a.pitching.era.value - b.pitching.era.value;
-        else if (columnName === "-ERA") return b.pitching.era.value - a.pitching.era.value;
-        else if (columnName === "RUNS") return a.pitching.runs.value - b.pitching.runs.value;
-        else if (columnName === "-RUNS") return b.pitching.runs.value - a.pitching.runs.value;
-        else if (columnName === "HR") return a.pitching.homeRuns.value - b.pitching.homeRuns.value;
-        else if (columnName === "-HR") return b.pitching.homeRuns.value - a.pitching.homeRuns.value;
+        else if (columnName === "ERA") return b.pitching.era.value - a.pitching.era.value;
+        else if (columnName === "-ERA") return a.pitching.era.value - b.pitching.era.value;
+        else if (columnName === "RUNS") return b.pitching.runs.value - a.pitching.runs.value;
+        else if (columnName === "-RUNS") return a.pitching.runs.value - b.pitching.runs.value;
+        else if (columnName === "HR") return b.pitching.homeRuns.value - a.pitching.homeRuns.value;
+        else if (columnName === "-HR") return a.pitching.homeRuns.value - b.pitching.homeRuns.value;
         else if (columnName === "K") return a.pitching.strikeOuts.value - b.pitching.strikeOuts.value;
         else if (columnName === "-K") return b.pitching.strikeOuts.value - a.pitching.strikeOuts.value;
-        else if (columnName === "BB") return a.pitching.baseOnBalls.value - b.pitching.baseOnBalls.value;
-        else if (columnName === "-BB") return b.pitching.baseOnBalls.value - a.pitching.baseOnBalls.value;
+        else if (columnName === "BB") return b.pitching.baseOnBalls.value - a.pitching.baseOnBalls.value;
+        else if (columnName === "-BB") return a.pitching.baseOnBalls.value - b.pitching.baseOnBalls.value;
         else if (columnName === "SOTWR") return a.pitching.strikeoutWalkRatio.value - b.pitching.strikeoutWalkRatio.value;
         else if (columnName === "-SOTWR") return b.pitching.strikeoutWalkRatio.value - a.pitching.strikeoutWalkRatio.value;
         else if (columnName === "GO") return a.pitching.groundOuts.value - b.pitching.groundOuts.value;
@@ -95,14 +88,14 @@ function TeamsTable(props) {
         else if (columnName === "-AO") return b.pitching.airOuts.value - a.pitching.airOuts.value;
         else if (columnName === "GOTAO") return a.pitching.groundOutsToAirouts.value - b.pitching.groundOutsToAirouts.value;
         else if (columnName === "-GOTAO") return b.pitching.groundOutsToAirouts.value - a.pitching.groundOutsToAirouts.value;
-        else if (columnName === "AVG") return a.pitching.avg.value - b.pitching.avg.value;
-        else if (columnName === "-AVG") return b.pitching.avg.value - a.pitching.avg.value;
-        else if (columnName === "SB") return a.pitching.stolenBases.value - b.pitching.stolenBases.value;
-        else if (columnName === "-SB") return b.pitching.stolenBases.value - a.pitching.stolenBases.value;
+        else if (columnName === "AVG") return b.pitching.avg.value - a.pitching.avg.value;
+        else if (columnName === "-AVG") return a.pitching.avg.value - b.pitching.avg.value;
+        else if (columnName === "SB") return b.pitching.stolenBases.value - a.pitching.stolenBases.value;
+        else if (columnName === "-SB") return a.pitching.stolenBases.value - b.pitching.stolenBases.value;
         else if (columnName === "CS") return a.pitching.caughtStealing.value - b.pitching.caughtStealing.value;
         else if (columnName === "-CS") return b.pitching.caughtStealing.value - a.pitching.caughtStealing.value;
-        else if (columnName === "SBP") return a.pitching.stolenBasePercentage.value - b.pitching.stolenBasePercentage.value;
-        else if (columnName === "-SBP") return b.pitching.stolenBasePercentage.value - a.pitching.stolenBasePercentage.value;
+        else if (columnName === "SBP") return b.pitching.stolenBasePercentage.value - a.pitching.stolenBasePercentage.value;
+        else if (columnName === "-SBP") return a.pitching.stolenBasePercentage.value - b.pitching.stolenBasePercentage.value;
         else if (columnName === "GIDP") return a.pitching.groundIntoDoublePlay.value - b.pitching.groundIntoDoublePlay.value;
         else if (columnName === "-GIDP") return b.pitching.groundIntoDoublePlay.value - a.pitching.groundIntoDoublePlay.value;
         return 0; // Default case if no sorting is applied
@@ -158,14 +151,14 @@ function TeamsTable(props) {
               <td className="top"><button onClick={(e) => sortingColumn('3B', e)} title="Triples">3Bs:</button></td>
               <td className="top"><button onClick={(e) => sortingColumn('HR', e)} title="Homeruns">HRs:</button></td>
               <td className="top"><button onClick={(e) => sortingColumn('RBI', e)} title="Runs batted in">RBIs:</button></td>
-              <td className="top"><button onClick={(e) => sortingColumn('ABPH', e)} title="At Bats per Homerun">AB/PHr:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('ABPH', e, "asc")} title="At Bats per Homerun">AB/PHr:</button></td>
               <td className="top"><button onClick={(e) => sortingColumn('BB', e)} title="Walks">Walks:</button></td>
               <td className="top"><button onClick={(e) => sortingColumn('SB', e)} title="Stolen Bases">SBs:</button></td>
               <td className="top"><button onClick={(e) => sortingColumn('AVG', e)} title="Batting Average">AVG:</button></td>
-              <td className="top"><button onClick={(e) => sortingColumn('SO', e)} title="Strikeouts">*SOs:</button></td>
-              <td className="top"><button onClick={(e) => sortingColumn('GO', e)} title="Groundouts">*GOs:</button></td>
-              <td className="top"><button onClick={(e) => sortingColumn('AO', e)} title="Airouts">*AOs:</button></td>
-              <td className="top"><button onClick={(e) => sortingColumn('GIDP', e)} title="Ground into Double Play">*GIDP:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('SO', e, "asc")} title="Strikeouts">*SOs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('GO', e, "asc")} title="Groundouts">*GOs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('AO', e, "asc")} title="Airouts">*AOs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('GIDP', e, "asc")} title="Ground into Double Play">*GIDP:</button></td>
             </tr>
             {renderArray.map(record => {
 

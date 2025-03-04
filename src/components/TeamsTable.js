@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import StatCell from './StatCell';
-import getStatClass from '../helper/getStatClass';
 
 function TeamsTable(props) {
   const [sortedBy, setSortedBy] = useState("doubles"); // State to set by which column the data is sorted
@@ -11,7 +10,9 @@ function TeamsTable(props) {
     return <div>Loading...</div>;
   }
 
-  const handleColumn = (field , event) => {
+/* 
+  
+    console.log("event.target.innerHTML:", event.target.innerHTML);
     const button = event.target;
     const parent = button.closest('td');
     const grandParent = parent.parentNode;
@@ -19,6 +20,15 @@ function TeamsTable(props) {
     allButtons.forEach(btn => btn.classList.remove('active'));
 
     parent.classList.add('active'); // Add active class to column that is currently being sorted
+ */
+
+  const sortingColumn = (field, event) => { 
+    // Reset columns
+    const allButtons = document.querySelectorAll('.columnHeadings td');
+    allButtons.forEach(btn => btn.classList.remove('active')); // Remove all active classes from columns
+    event.target.parentElement.classList.add('active'); // Add active class to column currently being sorted
+    
+
 
     // If the user clicks the same sort column, reverse the sort order
     setSortedBy(prev => prev === field ? `-${field}` : field);
@@ -140,22 +150,22 @@ function TeamsTable(props) {
       {props.result.data && (group === "hitting") && ( /* Render data when available */
         <table>
           <tbody>
-            <tr>
+            <tr className="columnHeadings">
               <td className="team">Team:</td>
-              <td className="top"><button onClick={(e) => handleColumn('RUNS', e)}  title="Runs">Runs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('HIT', e)} title="Hits">Hits:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('2B', e)} title="Doubles">2Bs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('3B', e)} title="Triples">3Bs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('HR', e)} title="Homeruns">HRs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('RBI', e)} title="Runs batted in">RBIs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('ABPH', e)} title="At Bats per Homerun">AB/PHr:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('BB', e)} title="Walks">Walks:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('SB', e)} title="Stolen Bases">SBs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('AVG', e)} title="Batting Average">AVG:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('SO', e)} title="Strikeouts">*SOs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('GO', e)} title="Groundouts">*GOs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('AO', e)} title="Airouts">*AOs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('GIDP', e)} title="Ground into Double Play">*GIDP:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('RUNS', e)} title="Runs">Runs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('HIT', e)} title="Hits">Hits:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('2B', e)} title="Doubles">2Bs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('3B', e)} title="Triples">3Bs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('HR', e)} title="Homeruns">HRs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('RBI', e)} title="Runs batted in">RBIs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('ABPH', e)} title="At Bats per Homerun">AB/PHr:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('BB', e)} title="Walks">Walks:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('SB', e)} title="Stolen Bases">SBs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('AVG', e)} title="Batting Average">AVG:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('SO', e)} title="Strikeouts">*SOs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('GO', e)} title="Groundouts">*GOs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('AO', e)} title="Airouts">*AOs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('GIDP', e)} title="Ground into Double Play">*GIDP:</button></td>
             </tr>
             {renderArray.map(record => {
 
@@ -198,22 +208,22 @@ function TeamsTable(props) {
       {props.result.data && (group === "pitching") && ( /* Render data when available */
         <table>
           <tbody>
-            <tr>
+          <tr className="columnHeadings">
               <td className="team">Team:</td>
-              <td className="top"><button onClick={(e) => handleColumn('ERA', e)} title="Earned Run Average">ERA:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('RUNS', e)} title="Runs">Runs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('HR', e)} title="Homeruns">HRs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('K', e)} title="StrikeOuts">SOs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('BB', e)} title="Walks">BBs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('SOTWR', e)} title="Strikeout to Walk Ratio">SOtWR:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('GO', e)} title="Groundouts">GOs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('AO', e)} title="Airouts">AOs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('GOTAO', e)} title="Ground out to Air outs">GOtAO:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('AVG', e)} title="Opponents Batting Avg">AVG:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('SB', e)} title="Stolen Bases">SBs:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('CS', e)} title="Caught Stealing">CS:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('SBP', e)} title="Stolen Base Percentage">SBP:</button></td>
-              <td className="top"><button onClick={(e) => handleColumn('GIDP', e)} title="Ground into Double Play">GIDP:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('ERA', e)} title="Earned Run Average">ERA:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('RUNS', e)} title="Runs">Runs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('HR', e)} title="Homeruns">HRs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('K', e)} title="StrikeOuts">SOs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('BB', e)} title="Walks">BBs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('SOTWR', e)} title="Strikeout to Walk Ratio">SOtWR:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('GO', e)} title="Groundouts">GOs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('AO', e)} title="Airouts">AOs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('GOTAO', e)} title="Ground out to Air outs">GOtAO:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('AVG', e)} title="Opponents Batting Avg">AVG:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('SB', e)} title="Stolen Bases">SBs:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('CS', e)} title="Caught Stealing">CS:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('SBP', e)} title="Stolen Base Percentage">SBP:</button></td>
+              <td className="top"><button onClick={(e) => sortingColumn('GIDP', e)} title="Ground into Double Play">GIDP:</button></td>
             </tr>
             {renderArray.map(record => {
 

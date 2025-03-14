@@ -4,17 +4,6 @@ import rankStats from '../helper/rankStats';
 import hitting from '../data/hitting.json';
 import pitching from '../data/pitching.json';
 
-/*
-const getData = () => {
-    return fetch(MLB_STATS_HITTING).then(response => response.json());
-}
-
-const getData2 = async () => {
-    const response = await fetch(MLB_STATS_HITTING);
-    return await response.json();
-}
-*/
-
 function useData() {
     const [data, setData] = useState(null); // State to store fetched data
     const [loading, setLoading] = useState(true); // State to manage loading
@@ -22,19 +11,6 @@ function useData() {
 
     const fetchData = async () => {
         try {
-            /* const urls = [
-                MLB_STATS_HITTING,
-                MLB_STATS_PITCHING
-            ];
-                        const [hitting, pitching] = await Promise.all(urls.map(
-                            async (url) => {
-                                // Step 1: Download the data
-                                const response = await fetch(url);
-                                // Step 2: Parse the data
-                                return await response.json();
-                            }
-                        )); */
-
             // Syncing both hitting and pitching to be sorted by team name
             hitting.stats[0].splits.sort((a, b) => a.team.name.localeCompare(b.team.name));
             pitching.stats[0].splits.sort((a, b) => a.team.name.localeCompare(b.team.name));

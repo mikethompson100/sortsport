@@ -1,6 +1,6 @@
 
-export default function getStatClass(rank, order = "desc") {
-  if (order === "desc") {
+export default function getStatClass(rank, ascend) {
+  if (!ascend) {
     switch (true) {
       case rank === 1:
         return 'topRank1';
@@ -17,7 +17,7 @@ export default function getStatClass(rank, order = "desc") {
       default: return
     }
   }
-  else if (order === "asc") {
+  else if (ascend) {
     switch (true) {
       case rank === 1:
         return 'botRank1';

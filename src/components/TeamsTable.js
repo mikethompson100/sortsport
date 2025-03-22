@@ -1,8 +1,8 @@
-import React, { act } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import StatCell from './StatCell';
 import TeamsTableHeading from './TeamsTableHeading';
-import { allHittingColumns, allPitchingColumns } from '../constants/leagueAPI';
+import { allHittingColumns, allPitchingColumns } from '../constants/constants';
 
 function TeamsTable(props) {
   const [activeColumn, setActiveColumn] = useState("Name"); // State to set by which column the data is sorted
@@ -19,10 +19,10 @@ function TeamsTable(props) {
       initActiveCol.classList.remove("active");
     }
   }
-  
+
   const handleColumnClick = (field) => {
     clearInitialActiveColumn();
-    if(field === activeColumn) {
+    if (field === activeColumn) {
       setFlipDefault(!flipDefault);
     }
     else {
@@ -35,10 +35,11 @@ function TeamsTable(props) {
 
   function sortTeamDataByColumn(teamsArray, category) {
     let sortedRecords = teamsArray;
-    if (category === "hitting") {
-      const column = allHittingColumns.find((element) => {
+
+    if (category === "hitting" || category === "pitching") {
+      const column = (category === "hitting" ? allHittingColumns : allPitchingColumns).find((element) => {
         return element.title === activeColumn;
-      })
+      });
 
       sortedRecords = props.result.data.sort((b, a) => {
 
@@ -54,34 +55,10 @@ function TeamsTable(props) {
           const bValue = b[category][column.name].value;
           return sortOrder * (aValue - bValue);
         }
-        const errMessage = `Invalid column name: ${activeColumn}`;  
+        const errMessage = `Invalid column name: ${activeColumn}`;
         throw new Error(errMessage); // Default case if no sorting is applied
       });
     }
-    else if (category === "pitching") {
-      const column = allPitchingColumns.find((element) => {
-        return element.title === activeColumn;
-      })
-
-      sortedRecords = props.result.data.sort((b, a) => {
-
-        if (activeColumn === "Name") {
-          const sortOrder = flipDefault ? -1 : 1;
-          return sortOrder * (a.team.name - b.team.name);
-        }
-
-        if (column) {
-          const defaultSortOrder = column.ascend ? -1 : 1;
-          const sortOrder = flipDefault ? defaultSortOrder * -1 : defaultSortOrder;
-          const aValue = a[category][column.name].value;
-          const bValue = b[category][column.name].value;
-          return sortOrder * (aValue - bValue);
-        }
-        const errMessage = `Invalid column name: ${activeColumn}`;  
-        throw new Error(errMessage); // Default case if no sorting is applied
-      });
-    }
-
     else console.log("Undefined category");
 
     return sortedRecords;
@@ -98,8 +75,8 @@ function TeamsTable(props) {
             <tr>
               <td className="season">
                 <div>{props.result.data[0].season} season</div>
-                <button onClick={() => { setGroup("hitting"); setActiveColumn("Name");  }} className={(group === "hitting") ? "active" : "inactive"}>Batting</button>
-                <button onClick={() => { setGroup("pitching"); setActiveColumn("Name");  }} className={(group === "pitching") ? "active" : "inactive"}>Pitching</button>
+                <button onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={(group === "hitting") ? "active" : "inactive"}>Batting</button>
+                <button onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={(group === "pitching") ? "active" : "inactive"}>Pitching</button>
               </td>
               <td className="rankLeft">
                 <div><span className="topRank1">Red</span> = Rank #1</div>
@@ -161,11 +138,11 @@ function TeamsTable(props) {
       {props.result.data && (group === "pitching") && ( /* Render data when available */
         <table>
           <tbody>
-          <tr className="columnHeadings">
+            <tr className="columnHeadings">
               <td className="team active">Team:</td>
               {allPitchingColumns.map(element => {
                 return (
-                  <TeamsTableHeading 
+                  <TeamsTableHeading
                     title={element.title}
                     activeColumn={activeColumn}
                     ascend={element.ascend}

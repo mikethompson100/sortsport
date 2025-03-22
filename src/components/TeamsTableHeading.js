@@ -5,7 +5,6 @@ export default function TeamsTableHeading(props) {
   const ascend = props.flipDefault? !props.ascend : props.ascend;
   const direction = ascend ? "up" : "down";
   const chevron = active && <span className={`bi bi-chevron-${direction}`}></span>
-  //console.log("Active column in TeamsTableHeading:", props.activeColumn);
 
   return (
     <td className={className}>

@@ -1,0 +1,84 @@
+@import "global.scss";
+
+.App {
+  text-align: left;
+  padding: 5px;
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 2;
+    margin-top: 0;
+    width: 100%;
+
+    .topTable {
+      margin-top: 0;
+
+      .season {
+        width: 171px;
+        z-index: 3;
+      }
+
+    }
+  }
+
+  >table {
+    border-collapse: collapse;
+    margin-top: 168px;
+
+    @media screen and (min-width: 768px) {
+      margin-top: 125px;
+    }
+
+    .columnHeadings {
+      position: sticky;
+      top: 164px;
+      z-index: 5;
+
+      @media screen and (min-width: 768px) {
+        top: 117px;
+      }
+
+      .team {
+        position: sticky;
+        top: 89px;
+        left: 0;
+        z-index: 2;
+        box-shadow: inset 0 0 0 1px #000;
+        white-space: nowrap;
+
+        &active {
+          background-color: green;
+          color: white;
+          font-weight: bold;
+          margin: 3px 0;
+          border: 1px solid #000;
+        }
+      }
+
+      .top {
+        position: sticky;
+        top: 89px;
+        background-color: #eee;
+        z-index: 1;
+        border: none;
+      }
+
+
+    }
+
+    .left {
+      text-align: left;
+      position: sticky;
+      left: 0;
+      background-color: #eee;
+      white-space: nowrap;
+    }
+  }
+
+}
+
+
+

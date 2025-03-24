@@ -68,25 +68,27 @@ function TeamsTable(props) {
 
   // Render the component
   return (
-    <div>
-      <div className="parent">
+    <>
+      <header>
         <table className="topTable">
           <tbody>
-            <tr>
+            <tr className="colorTds">
               <td className="season">
                 <div>{props.result.data[0].season} season</div>
                 <button onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={(group === "hitting") ? "active" : "inactive"}>Batting</button>
                 <button onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={(group === "pitching") ? "active" : "inactive"}>Pitching</button>
               </td>
-              <td className="rankLeft">
-                <div><span className="topRank1">Red</span> = Rank #1</div>
-                <div><span className="topRank2to5">Orange</span> = Rank #2&rarr;5</div>
-                <div><span className="topRank6to10">Yellow</span> = Rank 6&rarr;10</div>
+              <td>
+                <div>Rank</div>
+                <div className="topRank1">1</div>
+                <div className="topRank2to5">2&rarr;5</div>
+                <div className="topRank6to10">6&rarr;10</div>
               </td>
-              <td className="rankLeft">
-                <div><span className="botRank1">Navy</span> = Rank #30</div>
-                <div><span className="botRank2to5">Blue</span> = Rank #29&rarr;26</div>
-                <div><span className="botRank6to10">Cyan</span> = Rank 25&rarr;20</div>
+              <td>
+                <div>Rank</div>
+                <div className="botRank1">30</div>
+                <div className="botRank2to5">29&rarr;26</div>
+                <div className="botRank6to10">25&rarr;20</div>
               </td>
               <td>
                 *Columns are colored with the lowest amount in red.
@@ -94,7 +96,7 @@ function TeamsTable(props) {
             </tr>
           </tbody>
         </table>
-      </div>
+      </header>
       {props.result.loading && <p>Loading...</p>} {/* Show loading message */}
       {props.result.error && <p>Error: {props.result.error}</p>} {/* Show error message */}
       {props.result.data && (group === "hitting") && ( /* Render data when available */
@@ -117,7 +119,7 @@ function TeamsTable(props) {
             {renderArray.map(record => {
 
               return (
-                <tr key={record.team.id}>
+                <tr className="colorTds" key={record.team.id}>
                   <td className="left">{record.team.name}</td>
                   {allHittingColumns.map((column) => {
                     return (
@@ -155,7 +157,7 @@ function TeamsTable(props) {
             {renderArray.map(record => {
 
               return (
-                <tr key={record.team.id}>
+                <tr className="colorTds" key={record.team.id}>
                   <td className="left">{record.team.name}</td>
                   {allPitchingColumns.map((column) => {
                     return (
@@ -172,7 +174,7 @@ function TeamsTable(props) {
           </tbody>
         </table>
       )}
-    </div>
+    </>
   );
 }
 

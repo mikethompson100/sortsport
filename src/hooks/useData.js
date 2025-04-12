@@ -29,7 +29,7 @@ function useData() {
                 }
                 // Filter out unused columns from raw data
                 for (const key in hittingSplit.stat) {
-                    if (usedColumn(key, allHittingColumns )) {
+                    if (usedColumn(key, allHittingColumns)) {
                         const value = hittingSplit.stat[key];
                         team.hitting[key] = { value: value, rank: 0 };
                     }
@@ -63,7 +63,7 @@ function useData() {
     }, []); // Empty dependency array ensures it runs only once
 
     const result = { data, loading, error }
-    
+
     return result;
 }
 

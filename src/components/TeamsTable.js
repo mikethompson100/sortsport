@@ -36,30 +36,42 @@ function TeamsTable(props) {
   function sortTeamDataByColumn(teamsArray, category) {
     let sortedRecords = teamsArray;
 
-    if (category === "hitting" || category === "pitching") {
-      const column = (category === "hitting" ? allHittingColumns : allPitchingColumns).find((element) => {
-        return element.title === activeColumn;
+    if (activeColumn === "Name") {
+      const cloned = [...teamsArray];
+      cloned.sort((a, b) => {
+        const aFirst = a.team.name < b.team.name;
+        const aFirstNumber = aFirst ? -1 : 1;
+        const sortOrder = flipDefault ? -1 : 1;
+        return sortOrder * aFirstNumber;
       });
-
-      sortedRecords = props.result.data.sort((b, a) => {
-
-        if (activeColumn === "Name") {
-          const sortOrder = flipDefault ? -1 : 1;
-          return sortOrder * (a.team.name - b.team.name);
-        }
-
-        if (column) {
-          const defaultSortOrder = column.ascend ? -1 : 1;
-          const sortOrder = flipDefault ? defaultSortOrder * -1 : defaultSortOrder;
-          const aValue = a[category][column.name].value;
-          const bValue = b[category][column.name].value;
-          return sortOrder * (aValue - bValue);
-        }
-        const errMessage = `Invalid column name: ${activeColumn}`;
-        throw new Error(errMessage); // Default case if no sorting is applied
-      });
+      return cloned;
     }
-    else console.log("Undefined category");
+
+    const invalidCategory = category !== "hitting" && category !== "pitching";
+    if (invalidCategory) {
+      const errorMsg = `Invalid category: ${category}.`;
+      throw new Error(errorMsg);
+    }
+
+    const categoryColumnObjects = category === "hitting" ? allHittingColumns : allPitchingColumns;
+
+    const columnObject = categoryColumnObjects.find((element) => {
+      return element.title === activeColumn;
+    });
+
+    sortedRecords = props.result.data.sort((b, a) => {
+
+      if (columnObject) {
+        const defaultSortOrder = columnObject.ascend ? -1 : 1;
+        const sortOrder = flipDefault ? defaultSortOrder * -1 : defaultSortOrder;
+        const aValue = a[category][columnObject.name].value;
+        const bValue = b[category][columnObject.name].value;
+        return sortOrder * (aValue - bValue);
+      }
+      const errMessage = `Invalid column name: ${activeColumn}`;
+      throw new Error(errMessage); // Default case if no sorting is applied
+    });
+
 
     return sortedRecords;
   }
@@ -106,7 +118,7 @@ function TeamsTable(props) {
               <td className="team active">Team:</td>
               {allHittingColumns.map(element => {
                 return (
-                  <TeamsTableHeading 
+                  <TeamsTableHeading
                     title={element.title}
                     activeColumn={activeColumn}
                     ascend={element.ascend}

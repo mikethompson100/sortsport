@@ -25,17 +25,17 @@ export const allHittingColumns = [
 export const allPitchingColumns = [
   { name: "era", ascend: true, title: "Era" },
   { name: "runs", ascend: true, title: "Runs" },
-  { name: "homeRuns", ascend: true, title: "Hr"},
+  { name: "homeRuns", ascend: true, title: "Hr" },
   { name: "strikeOuts", ascend: false, title: "So" },
-  { name: "baseOnBalls", ascend: true, title: "Bb"},
+  { name: "baseOnBalls", ascend: true, title: "Bb" },
   { name: "strikeoutWalkRatio", ascend: false, title: "SoWr" },
   { name: "groundOuts", ascend: false, title: "Go" },
   { name: "airOuts", ascend: false, title: "Ao" },
   { name: "groundOutsToAirouts", ascend: false, title: "GoAo" },
   { name: "avg", ascend: true, title: "Avg" },
-  { name: "stolenBases", ascend: true, title: "Sb"},
+  { name: "stolenBases", ascend: true, title: "Sb" },
   { name: "caughtStealing", ascend: false, title: "Cs" },
-  { name: "stolenBasePercentage", ascend: true, title: "SbP"},
+  { name: "stolenBasePercentage", ascend: true, title: "SbP" },
   { name: "groundIntoDoublePlay", ascend: false, title: "GiDP" }
 ];
 export default MLB_STATS_HITTING;

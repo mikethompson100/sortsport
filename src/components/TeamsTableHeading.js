@@ -1,5 +1,6 @@
 
 export default function TeamsTableHeading(props) {
+
   const active = props.title === props.activeColumn;
   const className = active ? "top active" : "top";
   const ascend = props.flipDefault? !props.ascend : props.ascend;

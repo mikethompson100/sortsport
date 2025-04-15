@@ -56,6 +56,11 @@
           margin: 3px 0;
           border: 1px solid #000;
         }
+
+        button {
+          all: unset;
+          min-width: 90%;
+        }
       }
 
       .top {
@@ -79,6 +84,3 @@
   }
 
 }
-
-
-

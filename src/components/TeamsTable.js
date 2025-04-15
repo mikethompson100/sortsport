@@ -13,15 +13,7 @@ function TeamsTable(props) {
     return <div>Loading...</div>;
   }
 
-  function clearInitialActiveColumn() {
-    const initActiveCol = document.querySelector('.team');
-    if (initActiveCol.classList.contains("active")) {
-      initActiveCol.classList.remove("active");
-    }
-  }
-
   const handleColumnClick = (field) => {
-    clearInitialActiveColumn();
     if (field === activeColumn) {
       setFlipDefault(!flipDefault);
     }
@@ -78,6 +70,14 @@ function TeamsTable(props) {
 
   const renderArray = [...sortTeamDataByColumn(teamsArray, group)];
 
+  let chevron = "";
+  let direction = flipDefault ? "up" : "down";
+  let nameClass = "team";
+  if ((activeColumn === "Name")) {
+    chevron = <span className={`bi bi-chevron-${direction}`}></span>
+    nameClass = "team active";
+  }
+
   // Render the component
   return (
     <>
@@ -115,7 +115,9 @@ function TeamsTable(props) {
         <table>
           <tbody>
             <tr className="columnHeadings">
-              <td className="team active">Team:</td>
+              <td className={nameClass}>
+                <button onClick={(e) => handleColumnClick("Name")}>Team:</button>{chevron}
+              </td>
               {allHittingColumns.map(element => {
                 return (
                   <TeamsTableHeading
@@ -153,7 +155,9 @@ function TeamsTable(props) {
         <table>
           <tbody>
             <tr className="columnHeadings">
-              <td className="team active">Team:</td>
+              <td className={nameClass}>
+                <button onClick={(e) => handleColumnClick("Name")}>Team:</button>{chevron}
+              </td>
               {allPitchingColumns.map(element => {
                 return (
                   <TeamsTableHeading

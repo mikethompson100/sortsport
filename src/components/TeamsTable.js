@@ -2,15 +2,22 @@ import React from 'react';
 import { useState } from 'react';
 import StatCell from './StatCell';
 import TeamsTableHeading from './TeamsTableHeading';
-import { allHittingColumns, allPitchingColumns } from '../constants/constants';
+import useIsMobile from "../hooks/useIsMobile";
+import { allHittingColumns, allPitchingColumns, teamAbbrevs } from '../constants/constants';
 
 function TeamsTable(props) {
   const [activeColumn, setActiveColumn] = useState("Name"); // State to set by which column the data is sorted
   const [group, setGroup] = useState("hitting");  // State to set by which group data will be shown in the table (hitting/pitching)
   const [flipDefault, setFlipDefault] = useState(false);
+  const isMobile = useIsMobile();
 
   if (props.result.loading) {
     return <div>Loading...</div>;
+  }
+
+  function getAbbrev(teamLongName) {
+    const abbrev = teamAbbrevs.find(team => team.name === teamLongName)?.abbrev;
+    return abbrev;
   }
 
   const handleColumnClick = (field) => {
@@ -134,7 +141,7 @@ function TeamsTable(props) {
 
               return (
                 <tr className="colorTds" key={record.team.id}>
-                  <td className="left">{record.team.name}</td>
+                  <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
                   {allHittingColumns.map((column) => {
                     return (
                       <StatCell
@@ -174,7 +181,7 @@ function TeamsTable(props) {
 
               return (
                 <tr className="colorTds" key={record.team.id}>
-                  <td className="left">{record.team.name}</td>
+                  <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
                   {allPitchingColumns.map((column) => {
                     return (
                       <StatCell

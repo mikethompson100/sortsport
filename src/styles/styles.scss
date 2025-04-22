@@ -2,54 +2,50 @@
 
 .App {
   text-align: left;
-  padding: 5px;
+  padding: 5px 5px 5px 0;
 
   header {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #fff;
-    z-index: 2;
-    margin-top: 0;
+    background-color: #eee;
+    z-index: 3;
     width: 100%;
+    height: 44px;
 
     .topTable {
       margin-top: 0;
 
-      .season {
-        width: 171px;
-        z-index: 3;
-      }
+      .colorTds {
+        .season {
+          background-color: #eee;
 
+          button {
+            display: inline;
+          }
+        }
+      }
     }
   }
 
   >table {
     border-collapse: collapse;
-    margin-top: 168px;
-
-    @media screen and (min-width: 768px) {
-      margin-top: 125px;
-    }
+    margin-top: 39px;
 
     .columnHeadings {
+      z-index: 2;
       position: sticky;
-      top: 164px;
-      z-index: 5;
-
-      @media screen and (min-width: 768px) {
-        top: 117px;
-      }
+      top: 44px;
 
       .team {
         position: sticky;
-        top: 89px;
         left: 0;
         z-index: 2;
         box-shadow: inset 0 0 0 1px #000;
         white-space: nowrap;
         font-size: 1rem;
         background-color: #fff;
+
         @media screen and (min-width: 768px) {
           font-size: 1.2rem;
         }
@@ -59,22 +55,22 @@
           color: white;
           font-weight: bold;
           margin: 3px 0;
-          border: 1px solid #000;
         }
 
         button {
           all: unset;
           min-width: 0%;
+
           @media screen and (min-width: 768px) {
             min-width: 90%;
           }
-          
+
         }
       }
 
       .top {
         position: sticky;
-        top: 89px;
+        top: 0;
         background-color: #eee;
         z-index: 1;
         border: none;
@@ -84,11 +80,13 @@
     }
 
     .left {
+      position: sticky;
       text-align: center;
+
       @media screen and (min-width: 768px) {
         text-align: left;
       }
-      position: sticky;
+
       left: 0;
       background-color: #eee;
       white-space: nowrap;

@@ -93,24 +93,21 @@ function TeamsTable(props) {
           <tbody>
             <tr className="colorTds">
               <td className="season">
-                <div>{props.result.data[0].season} season</div>
+                <span>{props.result.data[0].season} season: </span>
                 <button onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={(group === "hitting") ? "active" : "inactive"}>Batting</button>
                 <button onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={(group === "pitching") ? "active" : "inactive"}>Pitching</button>
               </td>
-              <td>
-                <div>Rank</div>
-                <div className="topRank1">1</div>
-                <div className="topRank2to5">2&rarr;5</div>
-                <div className="topRank6to10">6&rarr;10</div>
-              </td>
-              <td>
-                <div>Rank</div>
-                <div className="botRank1">30</div>
-                <div className="botRank2to5">29&rarr;26</div>
-                <div className="botRank6to10">25&rarr;20</div>
-              </td>
-              <td>
-                *Columns are colored with the lowest amount in red.
+              <td className="rankContainer">
+                <div>
+                  <span>Ranking: </span>
+                  <span className="topRank1">&nbsp;&nbsp;1&nbsp;&nbsp;</span>
+                  <span className="topRank2to5">2 3--</span>
+                  <span className="topRank6to10">----</span>
+                  <span>--------</span>
+                  <span className="botRank6to10">----</span>
+                  <span className="botRank2to5">----</span>
+                  <span className="botRank1">----<span className="bi bi-chevron-right"></span></span>
+                </div>
               </td>
             </tr>
           </tbody>

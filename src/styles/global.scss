@@ -12,6 +12,8 @@
 .inactive {
   color: #000;
   margin: 3px 0;
+  padding: 0 6px;
+  font-size: 1.15rem;
 }
 
 td {
@@ -20,43 +22,59 @@ td {
   padding: 3px 5px;
   text-align: center;
   min-width: 60px;
+  background-color: #fff;
 }
 
 .colorTds {
+  .rankContainer {
+    background-color: #eee;
+
+    div {
+      border: 1px solid #000;
+    }
+  }
+
+  span {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
 
   .topRank1 {
     background-color: red;
     color: white;
     font-weight: bold;
-    padding: 3px;
   }
 
   .topRank2to5 {
     background-color: orange;
     color: black;
-    padding: 3px;
   }
 
   .topRank6to10 {
     background-color: yellow;
-    padding: 3px;
   }
 
   .botRank6to10 {
     background-color: cyan;
-    padding: 3px;
   }
 
   .botRank2to5 {
     background-color: blue;
     color: white;
-    padding: 3px;
   }
 
   .botRank1 {
     background-color: navy;
     color: white;
     font-weight: bold;
-    padding: 3px;
+
+    .bi.bi-chevron-right {
+      padding: 0;
+
+      &:before {
+        transform: rotate(360deg);
+        font-size: 1rem;
+      }
+    }
   }
 }

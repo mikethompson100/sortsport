@@ -10,7 +10,7 @@ export default function TeamsTableHeading(props) {
   return (
     <td className={className}>
       <button onClick={(e) => props.handleColumnClick(props.title)} title={props.title}>
-        {props.title}:
+        {props.title}
         {chevron}
       </button>
     </td>

@@ -5,6 +5,18 @@
   font-weight: bold;
   margin: 3px 0;
   border: 1px solid #000;
+
+  .bi-chevron-down::before {
+    padding-left: 2px;
+    font-size: .75rem;
+    font-weight: 700 !important;
+  }
+
+  .bi-chevron-up::before {
+    padding-left: 2px;
+    font-size: .75rem;
+    font-weight: 700 !important;
+  }
 }
 
 .inactive {
@@ -17,8 +29,8 @@ td {
   box-shadow: inset 0 0 0 1px #000;
   padding: 3px 5px;
   text-align: center;
-  min-width: 50px;
   background-color: #fff;
+  min-width: 60px;
 }
 
 .colorTds {
@@ -26,6 +38,7 @@ td {
     display: none;
     background-color: #eee;
     box-shadow: none;
+    font-size: 1rem;
 
     div {
       border: 1px solid #000;

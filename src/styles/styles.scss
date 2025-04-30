@@ -3,15 +3,14 @@
 .App {
   text-align: left;
   padding: 5px 5px 5px 0;
-  background-color: #249b34;
 
   header {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #000;
-    z-index: 3;
     width: 100%;
+    background-color: #eee;
+    z-index: 3;
     height: 44px;
     font-size: 1.5rem;
 
@@ -26,17 +25,35 @@
           color: #000;
           border: green 3px dashed;
           font-size: 1.7rem;
+          min-width: 60px;
+          width: auto;
         }
 
         .season {
           background-color: #eee;
           box-shadow: none;
+          min-width: 60px;
+          width: auto;
+          font-size: 1rem;
+
+          @media screen and (min-width: 768px) {
+            font-size: 1.5rem;
+          }
+
+          .mobileAbbrev {
+            display: none;
+
+            @media screen and (min-width: 576px) {
+              display: inline;
+              padding-left: 0;
+            }
+          }
 
           .description {
-            visibility: none;
+            display: none;
 
-            @media screen and (min-width: 768px) {
-              visibility: visible;
+            @media screen and (min-width: 992px) {
+              display: inline-block;
             }
           }
 
@@ -46,18 +63,6 @@
           }
         }
 
-        .rankContainer {
-          display: none;
-          background-color: #eee;
-          box-shadow: none;
-
-          @media screen and (min-width: 1400px) {
-            position: fixed;
-            display: block;
-            top: 51px;
-            left: 13px;
-          }
-        }
       }
 
     }
@@ -67,15 +72,53 @@
     border-collapse: collapse;
     margin-top: 45px;
     display: flex;
+    width: 1200px;
 
     @media screen and (min-width: 992px) {
       justify-content: center;
+      width: 100%;
+    }
+
+    .colorTds {
+      .legendColumn {
+        display: none;
+
+        @media screen and (min-width: 768px) {
+          display: block;
+        }
+
+        box-shadow: none;
+        background-color: #249b34;
+      }
     }
 
     .columnHeadings {
       z-index: 2;
       position: sticky;
       top: 44px;
+
+      .colorTds {
+        display: none;
+
+        @media screen and (min-width: 768px) {
+          display: block;
+        }
+
+        box-shadow: none;
+        background-color: #249b34;
+
+        .legendColumn {
+          position: fixed;
+          top: 80px;
+          box-shadow: none;
+          background-color: #eee;
+          border: 1px solid #000;
+
+          * {
+            border-bottom: 1px solid #000;
+          }
+        }
+      }
 
       .team {
         position: sticky;

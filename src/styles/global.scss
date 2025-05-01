@@ -1,23 +1,23 @@
 // Global scss styles
 .active {
   background-color: green !important;
-  color: white;
   font-weight: bold;
   margin: 3px 0;
   border: 1px solid #000;
-
-  .bi-chevron-down::before {
-    padding-left: 2px;
-    font-size: .75rem;
-    font-weight: 700 !important;
-  }
-
-  .bi-chevron-up::before {
-    padding-left: 2px;
-    font-size: .75rem;
-    font-weight: 700 !important;
-  }
 }
+
+.bi-chevron-down::before {
+  padding-left: 2px;
+  font-size: .75rem;
+  font-weight: 700 !important;
+}
+
+.bi-chevron-up::before {
+  padding-left: 2px;
+  font-size: .75rem;
+  font-weight: 700 !important;
+}
+
 
 .inactive {
   color: #000;
@@ -31,6 +31,11 @@ td {
   text-align: center;
   background-color: #fff;
   min-width: 60px;
+
+  a {
+    text-decoration: underline;
+    font-weight: bold;
+  }
 }
 
 .colorTds {

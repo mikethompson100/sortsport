@@ -11,8 +11,12 @@
     width: 100%;
     background-color: #eee;
     z-index: 3;
-    height: 44px;
     font-size: 1.5rem;
+    height: 38px;
+
+    @media screen and (min-width: 768px) {
+      height: 44px;
+    }
 
     .topTable {
       margin-top: 0;
@@ -27,6 +31,11 @@
           font-size: 1.7rem;
           min-width: 60px;
           width: auto;
+          font-size: 1rem;
+
+          @media screen and (min-width: 768px) {
+            font-size: 1.5rem;
+          }
         }
 
         .season {
@@ -38,6 +47,10 @@
 
           @media screen and (min-width: 768px) {
             font-size: 1.5rem;
+          }
+
+          a {
+            padding: 2px 5px;
           }
 
           .mobileAbbrev {
@@ -132,14 +145,24 @@
           font-size: 1rem;
         }
 
-        &active {
+        &.active {
           background-color: green;
           color: white;
           font-weight: bold;
           margin: 3px 0;
+
+          a,
+          a:visited,
+          a:hover,
+          a:active,
+          a:focus {
+            color: #fff;
+            width: 80%;
+            display: inline-block;
+          }
         }
 
-        button {
+        a {
           all: unset;
           min-width: 0%;
 
@@ -156,6 +179,16 @@
         background-color: #eee;
         z-index: 1;
         border: none;
+
+        &.active {
+          a,
+          a:visited,
+          a:hover,
+          a:active,
+          a:focus {
+            color: #fff;
+          }
+        }
       }
 
 

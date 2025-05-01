@@ -99,8 +99,11 @@ function TeamsTable(props) {
               </td>
               <td className="season">
                 <span>{props.result.data[0].season} <span className="description">season:</span> </span>
-                <button onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={(group === "hitting") ? "active" : "inactive"}>Bat<span className="mobileAbbrev">ting</span></button>
-                <button onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={(group === "pitching") ? "active" : "inactive"}>Pit<span className="mobileAbbrev">ching</span></button>
+                <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={(group === "hitting") ? "active" : "inactive"}>Bat<span className="mobileAbbrev">ting</span></a>
+                <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={(group === "pitching") ? "active" : "inactive"}>Pit<span className="mobileAbbrev">ching</span></a>
+              </td>
+              <td>
+                ?
               </td>
             </tr>
           </tbody>
@@ -113,7 +116,7 @@ function TeamsTable(props) {
           <tbody>
             <tr className="columnHeadings">
               <td className="colorTds">
-                <div class="legendColumn">
+                <div className="legendColumn">
                   <span>Ranks</span>
                   <div className="topRank1">1</div>
                   <div className="topRank2to5">2</div>
@@ -140,7 +143,7 @@ function TeamsTable(props) {
                 </div>
               </td>
               <td className={nameClass}>
-                <button onClick={(e) => handleColumnClick("Name")}>Team:</button>{chevron}
+                <a href="#" onClick={(e) => { e.preventDefault(); handleColumnClick("Name") }}>Team:</a>{chevron}
               </td>
               {allHittingColumns.map(element => {
                 return (
@@ -158,7 +161,7 @@ function TeamsTable(props) {
 
               return (
                 <tr className="colorTds" key={record.team.id}>
-                  <td class="legendColumn"></td>
+                  <td className="legendColumn"></td>
                   <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
                   {allHittingColumns.map((column) => {
                     return (
@@ -181,7 +184,7 @@ function TeamsTable(props) {
           <tbody>
             <tr className="columnHeadings">
               <td className="colorTds">
-                <div class="legendColumn">
+                <div className="legendColumn">
                   <span>Ranks</span>
                   <div className="topRank1">1</div>
                   <div className="topRank2to5">2</div>
@@ -208,7 +211,7 @@ function TeamsTable(props) {
                 </div>
               </td>
               <td className={nameClass}>
-                <button onClick={(e) => handleColumnClick("Name")}>Team:</button>{chevron}
+                <a href="#" onClick={(e) => handleColumnClick("Name")}>Team:</a>{chevron}
               </td>
               {allPitchingColumns.map(element => {
                 return (
@@ -226,7 +229,7 @@ function TeamsTable(props) {
 
               return (
                 <tr className="colorTds" key={record.team.id}>
-                  <td class="legendColumn"></td>
+                  <td className="legendColumn"></td>
                   <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
                   {allPitchingColumns.map((column) => {
                     return (

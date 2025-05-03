@@ -26,27 +26,34 @@ td {
   font-weight: bold;
   padding: 3px;
 }
+
 .colorTds .topRank2to5 {
   background-color: orange;
   color: black;
   padding: 3px;
 }
+
 .colorTds .topRank6to10 {
   background-color: yellow;
   padding: 3px;
 }
+
 .colorTds .botRank6to10 {
   background-color: cyan;
   padding: 3px;
 }
+
 .colorTds .botRank2to5 {
   background-color: blue;
   color: white;
   padding: 3px;
 }
+
 .colorTds .botRank1 {
   background-color: navy;
   color: white;
   font-weight: bold;
   padding: 3px;
-}/*# sourceMappingURL=global.css.map */
+}
+
+/*# sourceMappingURL=global.css.map */

@@ -12,7 +12,11 @@
     background-color: #eee;
     z-index: 3;
     font-size: 1.5rem;
-    height: 38px;
+    height: 39px;
+
+    @media screen and (max-width: 400px) {
+      height: 48px;
+    }
 
     @media screen and (min-width: 768px) {
       height: 44px;
@@ -22,13 +26,14 @@
       margin-top: 0;
 
       .colorTds {
+
         .brand {
           font-family: 'Courier New', Courier, monospace;
           letter-spacing: .3rem;
           font-weight: bold;
           color: #000;
           border: green 3px dashed;
-          font-size: 1.7rem;
+          font-size: 1.5rem;
           min-width: 60px;
           width: auto;
           font-size: 1rem;
@@ -46,11 +51,20 @@
           font-size: 1rem;
 
           @media screen and (min-width: 768px) {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
           }
 
           a {
             padding: 2px 5px;
+            border-radius: 5px;
+
+            &.active {
+              color: #fff;
+            }
+
+            @media screen and (max-width: 400px) {
+              padding: 0 3px 1px 3px;
+            }
           }
 
           .mobileAbbrev {
@@ -76,6 +90,68 @@
           }
         }
 
+        .legend-toggle {
+          font-size: 1.3rem;
+          min-width: 25px;
+          border-radius: 25%;
+          color: #000;
+
+          @media screen and (min-width: 768px) {
+            display: none;
+          }
+        }
+
+        #color-button {
+          background-color: transparent;
+          width: 25px;
+          height: 25px;
+          border-radius: 25%;
+          min-width: unset;
+          border: 1px solid #aaa;
+          background: linear-gradient(45deg,
+              indigo 17%,
+              red 17% 34%,
+              orange 34% 51%,
+              yellow 51% 68%,
+              green 68% 84%,
+              blue 84%);
+
+          &:before {
+            color: #000;
+            font-size: 1.2rem;
+          }
+        }
+
+        #bw-button {
+          width: 25px;
+          height: 25px;
+          border-radius: 25%;
+          border: 1px solid #aaa;
+          min-width: unset;
+
+          &:before {
+            color: #000;
+            font-size: 1.3rem;
+          }
+        }
+
+        @media screen and (max-width: 400px) {
+
+          .legend-toggle,
+          #color-button,
+          #bw-button {
+            font-size: 1rem;
+            min-width: 15px;
+            padding: 0;
+          }
+
+          .legend-toggle {
+            @media screen and (max-width: 400px) {
+              font-size: 1.3rem;
+              padding: 0 5px;
+            }
+          }
+        }
       }
 
     }
@@ -181,6 +257,7 @@
         border: none;
 
         &.active {
+
           a,
           a:visited,
           a:hover,
@@ -205,6 +282,23 @@
       left: 0;
       background-color: #eee;
       white-space: nowrap;
+    }
+  }
+
+  #mobile-modal {
+    position: fixed;
+    top: 11vh;
+    left: 41vw;
+    background-color: #fff;
+    text-align: center;
+    padding: 5px;
+    border: 5px solid #000;
+    overflow: auto;
+    height: 80vh;
+    z-index: 3;
+
+    @media screen and (min-width: 768px) {
+      display: none;
     }
   }
 }

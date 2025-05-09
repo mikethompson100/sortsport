@@ -57,3 +57,9 @@ td {
 }
 
 /*# sourceMappingURL=global.css.map */
+
+.black_white_override {
+  color: #000;
+  background-color: #fff;
+  font-weight: 300;
+}

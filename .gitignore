@@ -11,3 +11,6 @@
 # css
 *.css.map
 dist/
+
+# img
+src/assets/images

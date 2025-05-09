@@ -90,6 +90,7 @@ function TeamsTable(props) {
   // Render the component
   return (
     <>
+      <div id="modal-root" className={`${(isLegendActivated && isMobile) ? 'opacity-50' : 'opacity-0'}`}></div>
       <header>
         <table className="topTable">
           <tbody>
@@ -97,19 +98,25 @@ function TeamsTable(props) {
               <td className='brand'>
                 S0RTSP0RT
               </td>
-              <td className="season">
-                <span>{props.result.data[0].season}<span className="description">season:</span> </span>
-                <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={(group === "hitting") ? "active" : "inactive"}>Bat<span className="mobileAbbrev">ting</span></a>
-                <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={(group === "pitching") ? "active" : "inactive"}>Pit<span className="mobileAbbrev">ching</span></a>
+              <td className={`season ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+                <span>{props.result.data[0].season}<span className="description">season</span> </span>
+                <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={`hitting ${group === "hitting" ? "active" : "inactive"}`}><span className="categorytext">Hitting</span></a>
+                <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={`pitching ${group === "pitching" ? "active" : "inactive"}`}><span className="categorytext">Pitching</span></a>
               </td>
-              <td className="legend-toggle">
+              <td className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
                 <a id="legend-button" href="#" onClick={() => {
                   setIsLegendActivated(!isLegendActivated);
-                }}>?</a>
+                }}>
+                  <i className="bi bi-info-circle"></i>
+                </a>
               </td>
-              <td id="color-button" className="bi bi-palette">
+              <td id="color-button" className={`bi bi-palette ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
               </td>
-              <td id="bw-button" className="bi bi-circle-half">
+              <td id="bw-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+                <a href="#" onClick={() => {
+  
+                }}>
+                </a>
               </td>
             </tr>
           </tbody>
@@ -253,31 +260,31 @@ function TeamsTable(props) {
         </table>
       )}
       {isLegendShown && (
-          <div id="mobile-modal" className="colorTds">
-            <span><strong>Ranks</strong></span>
-            <div className="topRank1">1</div>
-            <div className="topRank2to5">2</div>
-            <div className="topRank2to5">3</div>
-            <div className="topRank2to5">4</div>
-            <div className="topRank2to5">5</div>
-            <div className="topRank6to10">6</div>
-            <div className="topRank6to10">7</div>
-            <div className="topRank6to10">8</div>
-            <div className="topRank6to10">9</div>
-            <div className="topRank6to10">10</div>
-            <div>...</div>
-            <div className="botRank6to10">20</div>
-            <div className="botRank6to10">21</div>
-            <div className="botRank6to10">22</div>
-            <div className="botRank6to10">23</div>
-            <div className="botRank6to10">24</div>
-            <div className="botRank2to5">25</div>
-            <div className="botRank2to5">26</div>
-            <div className="botRank2to5">27</div>
-            <div className="botRank2to5">28</div>
-            <div className="botRank2to5">29</div>
-            <div className="botRank1">30</div>
-          </div>
+        <div id="mobile-modal" className="colorTds">
+          <span><strong>Ranks</strong></span>
+          <div className="topRank1">1</div>
+          <div className="topRank2to5">2</div>
+          <div className="topRank2to5">3</div>
+          <div className="topRank2to5">4</div>
+          <div className="topRank2to5">5</div>
+          <div className="topRank6to10">6</div>
+          <div className="topRank6to10">7</div>
+          <div className="topRank6to10">8</div>
+          <div className="topRank6to10">9</div>
+          <div className="topRank6to10">10</div>
+          <div>...</div>
+          <div className="botRank6to10">20</div>
+          <div className="botRank6to10">21</div>
+          <div className="botRank6to10">22</div>
+          <div className="botRank6to10">23</div>
+          <div className="botRank6to10">24</div>
+          <div className="botRank2to5">25</div>
+          <div className="botRank2to5">26</div>
+          <div className="botRank2to5">27</div>
+          <div className="botRank2to5">28</div>
+          <div className="botRank2to5">29</div>
+          <div className="botRank1">30</div>
+        </div>
       )}
     </>
   );

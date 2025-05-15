@@ -90,37 +90,33 @@ function TeamsTable(props) {
   // Render the component
   return (
     <>
-      <div id="modal-root" className={`${(isLegendActivated && isMobile) ? 'opacity-50' : 'opacity-0'}`}></div>
+      <div id="modal-root" className={`${(isLegendActivated) ? 'opacity-50' : 'opacity-0'}`}></div>
       <header>
-        <table className="topTable">
-          <tbody>
-            <tr className="colorTds">
-              <td className='brand'>
+              <div className='brand'>
                 S0RTSP0RT
-              </td>
-              <td className={`season ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
-                <span>{props.result.data[0].season}<span className="description">season</span> </span>
-                <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={`hitting ${group === "hitting" ? "active" : "inactive"}`}><span className="categorytext">Hitting</span></a>
-                <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={`pitching ${group === "pitching" ? "active" : "inactive"}`}><span className="categorytext">Pitching</span></a>
-              </td>
-              <td className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
-                <a id="legend-button" href="#" onClick={() => {
-                  setIsLegendActivated(!isLegendActivated);
-                }}>
-                  <i className="bi bi-info-circle"></i>
-                </a>
-              </td>
-              <td id="color-button" className={`bi bi-palette ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
-              </td>
-              <td id="bw-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
-                <a href="#" onClick={() => {
-  
-                }}>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+              <div className="headerContainer">
+                <div className={`season ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+                  {isMobile ? "'" + String(props.result.data[0].season).slice(-2) : props.result.data[0].season}<span className="description">season</span>
+                  <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={`hitting ${group === "hitting" ? "active" : "inactive"}`}><span className="categorytext">Hitting</span></a>
+                  <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={`pitching ${group === "pitching" ? "active" : "inactive"}`}><span className="categorytext">Pitching</span></a>
+                </div>
+                <div className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
+                  <a id="legend-button" href="#" onClick={() => {
+                    setIsLegendActivated(!isLegendActivated);
+                  }}>
+                    <i className="bi bi-info-circle"></i>
+                  </a>
+                </div>
+                <div id="color-button" className={`bi bi-palette ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+                </div>
+                <div id="bw-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+                  <a href="#" onClick={() => {
+    
+                  }}>
+                  </a>
+                </div>
+              </div>
       </header>
       {props.result.loading && <p>Loading...</p>} {/* Show loading message */}
       {props.result.error && <p>Error: {props.result.error}</p>} {/* Show error message */}
@@ -128,7 +124,7 @@ function TeamsTable(props) {
         <table>
           <tbody>
             <tr className="columnHeadings">
-              <td className="colorTds">
+              <td>
                 <div className="legendColumn">
                   <span>Ranks</span>
                   <div className="topRank1">1</div>
@@ -173,7 +169,7 @@ function TeamsTable(props) {
             {renderArray.map(record => {
 
               return (
-                <tr className="colorTds" key={record.team.id}>
+                <tr key={record.team.id}>
                   <td className="legendColumn"></td>
                   <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
                   {allHittingColumns.map((column) => {
@@ -196,7 +192,7 @@ function TeamsTable(props) {
         <table>
           <tbody>
             <tr className="columnHeadings">
-              <td className="colorTds">
+              <td>
                 <div className="legendColumn">
                   <span>Ranks</span>
                   <div className="topRank1">1</div>
@@ -241,7 +237,7 @@ function TeamsTable(props) {
             {renderArray.map(record => {
 
               return (
-                <tr className="colorTds" key={record.team.id}>
+                <tr key={record.team.id}>
                   <td className="legendColumn"></td>
                   <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
                   {allPitchingColumns.map((column) => {
@@ -259,8 +255,8 @@ function TeamsTable(props) {
           </tbody>
         </table>
       )}
-      {isLegendShown && (
-        <div id="mobile-modal" className="colorTds">
+      {isLegendShown && isLegendActivated && (
+        <div id="popup-legend-modal">
           <span><strong>Ranks</strong></span>
           <div className="topRank1">1</div>
           <div className="topRank2to5">2</div>

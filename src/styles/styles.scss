@@ -4,264 +4,70 @@
   text-align: left;
   padding: 5px 5px 5px 0;
 
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    font-size: 1.5rem;
-    height: 39px;
-    border-bottom: 2px solid #000;
-    background: #fff;
-    padding-top: 3px;
-
-    @media screen and (max-width: 400px) {
-      height: 48px;
-    }
-
-    @media screen and (min-width: 768px) {
-      height: 44px;
-    }
-
-    .topTable {
-      margin-top: 0;
-
-      .colorTds {
-
-        .dimmed {
-          opacity: .2;
-        }
-
-        .brand {
-          font-family: 'Courier New', Courier, monospace;
-          letter-spacing: .3rem;
-          font-weight: bold;
-          color: #000;
-          border: green 3px dashed;
-          font-size: 1.5rem;
-          min-width: 60px;
-          width: auto;
-          font-size: 1rem;
-
-          @media screen and (min-width: 768px) {
-            font-size: 1.5rem;
-          }
-        }
-
-        .season {
-          background-color: transparent;
-          box-shadow: none;
-          min-width: 60px;
-          width: auto;
-          font-size: 1rem;
-          height: 30px;
-          display: flex;
-          align-items: center;
-
-          @media screen and (min-width: 768px) {
-            font-size: 1.3rem;
-          }
-
-          a {
-            margin-left: 3px;
-            padding: 5px 2px 0px 2px;
-            border-radius: 5px;
-            .categorytext {
-              display: none;
-              @media screen and (min-width: 768px) {
-                display: inline-block;
-              }
-            }
-            @media screen and (orientation: landscape) {
-              padding: 9px 5px 0px 5px;
-            }
-
-            &.hitting {
-
-              &:before {
-                content: "";
-                background-image: url('/src/assets/images/batter.jpg');
-                display: inline-block;
-                background-size: contain;
-                width: 26px;
-                height: 24px;
-                background-repeat: no-repeat;
-                background-position: 6px 0;
-                background-color: #fff;
-                border-radius: 5px;
-                @media screen and (min-width: 768px) {
-                  display: none;
-                }
-              }
-            }
-
-            &.pitching {
-
-              &:before {
-                content: "";
-                background-image: url('/src/assets/images/pitcher.webp');
-                display: inline-block;
-                background-size: contain;
-                width: 26px;
-                height: 24px;
-                background-repeat: no-repeat;
-                background-position: 4px 0;
-                background-color: #fff;
-                border-radius: 5px;
-                @media screen and (min-width: 768px) {
-                  display: none;
-                }
-              }
-            }
-
-            @media screen and (max-width: 400px) {
-              padding: 5px 2px 0px 2px;
-            }
-          }
-
-          .description {
-            display: none;
-
-            @media screen and (min-width: 768px) {
-              display: inline-block;
-              padding: 0 4px;
-            }
-          }
-
-          button {
-            display: inline;
-            font-size: unset;
-          }
-        }
-
-        .legend-toggle {
-          position: relative;
-          font-size: 1.3rem;
-          min-width: 25px;
-          border-radius: 25%;
-          color: #000;
-
-          @media screen and (min-width: 768px) {
-            display: none;
-          }
-
-          &.legend-button-highlighted {
-            border: 1px solid green;
-
-            .bi:before {
-              color: green;
-              font-size: 1.7rem;
-              font-weight: 700 !important;
-            }
-          }
-        }
-
-        #color-button {
-          background-color: transparent;
-          width: 25px;
-          height: 25px;
-          border-radius: 25%;
-          min-width: unset;
-          border: 1px solid #aaa;
-          background: linear-gradient(45deg,
-              indigo 17%,
-              red 17% 34%,
-              orange 34% 51%,
-              yellow 51% 68%,
-              green 68% 84%,
-              blue 84%);
-
-          &:before {
-            color: #000;
-            font-size: 1.2rem;
-          }
-        }
-
-        #bw-button {
-          width: 25px;
-          height: 25px;
-          border-radius: 25%;
-          border: 1px solid #aaa;
-          min-width: unset;
-
-          &:before {
-            color: #000;
-            font-size: 1.3rem;
-          }
-        }
-
-        @media screen and (max-width: 400px) {
-
-          .legend-toggle,
-          #color-button,
-          #bw-button {
-            font-size: 1rem;
-            min-width: 15px;
-            padding: 0;
-          }
-
-          .legend-toggle {
-            font-size: 1.3rem;
-            padding: 0 5px;
-          }
-        }
-      }
-
-    }
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
 
   >table {
     border-collapse: collapse;
-    margin-top: 65px;
+    margin-top: 44px;
     display: flex;
-    width: 1200px;
+    width: 1116px;
+    @media screen and (min-width: 768px) {
+      width: 895px
+    }
 
     @media screen and (min-width: 992px) {
       justify-content: center;
       width: 100%;
     }
 
-    .colorTds {
-      .legendColumn {
-        display: none;
+    .legendColumn {
+      display: none;
+      box-shadow: none;
 
-        @media screen and (min-width: 768px) {
-          display: block;
-        }
-
-        box-shadow: none;
-        /* background-color: #249b34; */
+      @media screen and (min-width: 768px) {
+        display: block;
+        visibility: hidden;
+      }      
+      @media screen and (min-width: 1200px) {
+        visibility: visible;
       }
+
     }
+
 
     .columnHeadings {
       z-index: 2;
       position: sticky;
       top: 50px;
 
-      .colorTds {
+      td:nth-child(1) {
         display: none;
 
         @media screen and (min-width: 768px) {
+          box-shadow: none;
           display: block;
         }
+      }
 
+      box-shadow: none;
+
+      .legendColumn {
+        position: fixed;
+        top: 70px;
         box-shadow: none;
-        /* background-color: #249b34; */
+        background-color: #eee;
+        border: 1px solid #000;
 
-        .legendColumn {
-          position: fixed;
-          top: 70px;
-          box-shadow: none;
-          background-color: #eee;
-          border: 1px solid #000;
-
-          * {
-            border-bottom: 1px solid #000;
-          }
+        * {
+          border-bottom: 1px solid #000;
         }
       }
+
+      /* } */
 
       .team {
         position: sticky;
@@ -280,6 +86,11 @@
           color: white;
           font-weight: bold;
           margin: 3px 0;
+
+          @media screen and (min-width: 768px) {
+            width: 165px;
+            margin: 0;
+          }
 
           a,
           a:visited,
@@ -339,7 +150,7 @@
     }
   }
 
-  #mobile-modal {
+  #popup-legend-modal {
     position: fixed;
     top: 11vh;
     left: 41vw;
@@ -351,22 +162,13 @@
     height: 80vh;
     z-index: 100;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1200px) {
       display: none;
     }
   }
 }
 
-/* 
-.opacity-0, .opacity-50 {
-  --bs-backdrop-zindex: 1050;
-  --bs-backdrop-bg: #000;
-  --bs-backdrop-opacity: 0.5;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-} */
+
 .opacity-0 {
   background-color: rgba(0, 0, 0, 0);
 }
@@ -379,4 +181,228 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+}
+
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  font-size: 1.5rem;
+  height: 49px;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  display: flex;
+  align-items: center;
+
+  @media screen and (min-width: 768px) {
+    height: 44px;
+    width: 1200px;
+  }
+
+
+}
+
+.brand {
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: .3rem;
+  font-weight: bold;
+  border: green 3px dashed;
+  font-size: 1.3rem;
+  display: inline;
+  margin-left: 6px;
+  padding: 1px 3px;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.dimmed {
+  opacity: .2;
+}
+
+.season {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid #7c7;
+  width: 30vw;
+  background-color: #eee;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.3rem;
+    width: 100%;
+  }
+
+  a {
+    margin-left: 3px;
+    padding: 5px 2px 0px 2px;
+    border-radius: 5px;
+
+    .categorytext {
+      display: none;
+
+      @media screen and (min-width: 768px) {
+        display: inline-block;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      padding: 9px 5px 0px 5px;
+    }
+
+    @media screen and (max-width: 400px) {
+      padding: 5px 2px 0px 2px;
+    }
+  }
+
+
+  button {
+    display: inline;
+    font-size: unset;
+  }
+}
+
+.hitting {
+
+  &:before {
+    content: "";
+    background-image: url('/src/assets/images/batter.jpg');
+    display: inline-block;
+    background-size: contain;
+    width: 26px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: 6px 0;
+    background-color: #fff;
+    border-radius: 5px;
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &.active {
+    color: #fff;
+  }
+
+  &.inactive {
+    color: #777;
+  }
+}
+
+.pitching {
+
+  &:before {
+    content: "";
+    background-image: url('/src/assets/images/pitcher.webp');
+    display: inline-block;
+    background-size: contain;
+    width: 26px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: 4px 0;
+    background-color: #fff;
+    border-radius: 5px;
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &.active {
+    color: #fff;
+  }
+
+  &.inactive {
+    color: #777;
+  }
+}
+
+.description {
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+    padding: 0 4px;
+  }
+}
+
+.legend-toggle {
+  position: relative;
+  font-size: 1.6rem;
+  min-width: 25px;
+  border-radius: 25%;
+  color: #000;
+  margin-right: 10px;
+
+  @media screen and (min-width: 1200px) {
+    display: none;
+  }
+
+  &.legend-button-highlighted {
+    border: 1px solid green;
+
+    .bi:before {
+      color: green;
+      font-size: 1.7rem;
+      font-weight: 700 !important;
+    }
+  }
+}
+
+#color-button {
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
+  border-radius: 25%;
+  min-width: unset;
+  border: 1px solid #aaa;
+  background: linear-gradient(45deg,
+      indigo 17%,
+      red 17% 34%,
+      orange 34% 51%,
+      yellow 51% 68%,
+      green 68% 84%,
+      blue 84%);
+
+  &:before {
+    color: #000;
+    font-size: 1.2rem;
+  }
+}
+
+#bw-button {
+  width: 25px;
+  height: 25px;
+  min-width: unset;
+
+  &:before {
+    color: #000;
+    font-size: 1.6rem;
+    vertical-align: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+
+  .legend-toggle,
+  #color-button,
+  #bw-button {
+    font-size: 1rem;
+    min-width: 15px;
+    padding: 0;
+  }
+
+  .legend-toggle {
+    font-size: 1.3rem;
+    padding: 0 5px;
+  }
 }

@@ -9,6 +9,7 @@ function TeamsTable(props) {
   const [activeColumn, setActiveColumn] = useState("Name"); // State to set by which column the data is sorted
   const [group, setGroup] = useState("hitting");  // State to set by which group data will be shown in the table (hitting/pitching)
   const [flipDefault, setFlipDefault] = useState(false);
+  const [colorful, setColorful] = useState(true);
   const isMobile = useIsMobile();
   const [isLegendActivated, setIsLegendActivated] = useState(false);
   const isLegendShown = !isMobile || isLegendActivated;
@@ -92,15 +93,21 @@ function TeamsTable(props) {
     <>
       <div id="modal-root" className={`${(isLegendActivated) ? 'opacity-50' : 'opacity-0'}`}></div>
       <header>
-        <div className='brand'>
-          S0RTSP0RT
-        </div>
-        <div className="headerContainer">
-          <div className={`season ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+        <div className="headerLeft">
+          <span className='brand'>
+            <span className="ss">S.S.</span><span className="sortsport">S0RTSP0RT</span>
+          </span>
+          <span>
             {isMobile ? "'" + String(props.result.data[0].season).slice(-2) : props.result.data[0].season}<span className="description">season</span>
+          </span>
+        </div>
+        <div className="headerCenter headerContainer">
+          <div className={`season ${(isLegendActivated) ? 'dimmed' : ''}`}>
             <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={`hitting ${group === "hitting" ? "active" : "inactive"}`}><span className="categorytext">Hitting</span></a>
             <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={`pitching ${group === "pitching" ? "active" : "inactive"}`}><span className="categorytext">Pitching</span></a>
           </div>
+        </div>
+        <div className="headerRight">
           <div className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
             <a id="legend-button" href="#" onClick={() => {
               setIsLegendActivated(!isLegendActivated);
@@ -108,7 +115,7 @@ function TeamsTable(props) {
               <i className="bi bi-info-circle"></i>
             </a>
           </div>
-          <div id="color-button" className={`bi bi-palette ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+          <div id="color-button" className={`${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
           </div>
           <div id="bw-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
             <a href="#" onClick={() => {
@@ -121,7 +128,7 @@ function TeamsTable(props) {
       {props.result.loading && <p>Loading...</p>} {/* Show loading message */}
       {props.result.error && <p>Error: {props.result.error}</p>} {/* Show error message */}
       {props.result.data && (group === "hitting") && ( /* Render data when available */
-        <table>
+        <table className={!colorful && "bw"}>
           <tbody>
             <tr className="columnHeadings">
               <td>
@@ -268,7 +275,15 @@ function TeamsTable(props) {
           <div className="topRank6to10">8</div>
           <div className="topRank6to10">9</div>
           <div className="topRank6to10">10</div>
-          <div>...</div>
+          <div className="topRank botRank">11</div>
+          <div className="topRank botRank">12</div>
+          <div className="topRank botRank">13</div>
+          <div className="topRank botRank">14</div>
+          <div className="topRank botRank">15</div>
+          <div className="topRank botRank">16</div>
+          <div className="topRank botRank">17</div>
+          <div className="topRank botRank">18</div>
+          <div className="topRank botRank">19</div>
           <div className="botRank6to10">20</div>
           <div className="botRank6to10">21</div>
           <div className="botRank6to10">22</div>

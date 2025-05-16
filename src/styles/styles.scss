@@ -5,18 +5,14 @@
   padding: 5px 5px 5px 0;
 
   @media screen and (min-width: 768px) {
-    /*     display: flex;
-    align-items: center;
-    flex-direction: column; */
-
     margin-left: auto;
     margin-right: auto;
-    max-width: 1100px;
+    max-width: 1097px;
   }
 
   >table {
     border-collapse: collapse;
-    margin-top: 66px;
+    margin-top: 67px;
     display: flex;
     width: 1116px;
 
@@ -32,6 +28,7 @@
     .legendColumn {
       display: none;
       box-shadow: none;
+      visibility: hidden;
 
       @media screen and (min-width: 992px) {
         display: block;
@@ -63,17 +60,20 @@
 
       .legendColumn {
         position: fixed;
-        top: 69px;
+        top: 71px;
         box-shadow: none;
         background-color: #eee;
         border: 1px solid #000;
 
         * {
           border-bottom: 1px solid #000;
+          height: 33px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
 
-      /* } */
 
       .team {
         position: sticky;
@@ -123,7 +123,7 @@
       .top {
         position: sticky;
         top: 0;
-        background-color: #eee;
+        background-color: #ddd;
         z-index: 1;
         border: none;
 
@@ -158,22 +158,39 @@
 
   #popup-legend-modal {
     position: fixed;
-    top: 11vh;
-    left: 41vw;
+    top: 10.7vh;
+    left: 43vw;
     background-color: #fff;
     text-align: center;
     padding: 5px;
     border: 1px solid #000;
     overflow: auto;
-    height: 80vh;
+    height: auto;
     z-index: 100;
+    width: 80px;
 
     @media screen and (min-width: 1200px) {
       display: none;
     }
+
+    [class^="topRank"],
+    [class^="botRank"] {
+      padding: 0px 5px;
+      height: auto;
+      border-right: 1px inset #000;
+      border-left: 1px inset #000;
+      border-bottom: 1px inset #000;
+      display: table-cell;
+      display: flex;
+      justify-content: center;
+      font-size: .8rem;
+
+      @media screen and (min-width: 768px) {
+        font-size: 1rem;
+      }
+    }
   }
 }
-
 
 .opacity-0 {
   background-color: rgba(0, 0, 0, 0);
@@ -187,6 +204,10 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+
+  @media screen and (min-width: 1200px) {
+    display: none;
+  }
 }
 
 
@@ -200,12 +221,42 @@ header {
   background: #fff;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   @media screen and (min-width: 768px) {
-    width: 1200px;
+    max-width: 1120px;
   }
 
 
+}
+
+
+.headerLeft {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.2rem;
+  }
+}
+
+.ss {
+  display: none;
+
+  @media screen and (max-width: 576px) {
+    display: block;
+    letter-spacing: normal;
+  }
+}
+
+.sortsport {
+  display: none;
+
+  @media screen and (min-width: 577px) {
+    display: block;
+  }
 }
 
 .brand {
@@ -214,11 +265,19 @@ header {
   font-weight: bold;
   border: green 3px dashed;
   font-size: 1.3rem;
-  display: inline;
+  display: inline-block;
   margin-left: 6px;
+  margin-right: 12px;
   padding: 1px 3px;
+  width: 49px;
+  transition: width 1s ease;
+
+  @media screen and (min-width: 577px) {
+    width: 155px;
+  }
 }
 
+/* 
 .headerContainer {
   display: flex;
   justify-content: space-evenly;
@@ -227,41 +286,43 @@ header {
   @media screen and (min-width: 768px) {
     max-width: none;
   }
-}
+} */
 
 .dimmed {
   opacity: .2;
+
+  @media screen and (min-width: 1200px) {
+    opacity: 1;
+  }
 }
 
 .season {
+  margin-right: 12px;
+  font-size: 1.3rem;
+  width: 126px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 30vw;
-  margin-left: 10px;
-  margin-right: 12px;
-  font-size: 1.3rem;
 
   @media screen and (min-width: 768px) {
     font-size: 1.3rem;
     width: 100%;
   }
 
-  a {
+  a.active,
+  a.inactive {
     margin-left: 3px;
-    padding: 5px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
     border-radius: 5px;
+    border: 1px solid #000;
 
     .categorytext {
       display: none;
 
       @media screen and (min-width: 768px) {
         display: inline-block;
+        padding: 0px 3px 4px 3px;
       }
-    }
-
-    @media screen and (max-width: 767px) and (orientation: landscape) {
-      padding: 9px 5px 0px 5px;
     }
   }
 
@@ -273,8 +334,6 @@ header {
 }
 
 .hitting {
-/*   width: 44px;
-  height: 44px; */
 
   &:before {
     content: "";
@@ -297,13 +356,10 @@ header {
     color: #fff;
     padding: 3px 3px 1px 3px;
 
-/*     @media screen and (max-width:430px) {
-      padding-right: 3px;
-    } */
   }
 
   &.inactive {
-    color: #777;
+    color: #bbb;
     border: 1px solid #ccc;
     padding: 0;
 
@@ -314,8 +370,6 @@ header {
 }
 
 .pitching {
-/*   width: 44px;
-  height: 44px; */
 
   &:before {
     content: "";
@@ -338,19 +392,16 @@ header {
     color: #fff;
     padding: 3px 3px 1px 3px;
 
-/*     @media screen and (max-width:430px) {
-      padding-right: 3px;
-    } */
-
     &:before {
       background-position: 6px 1px;
     }
   }
 
   &.inactive {
-    color: #777;
+    color: #bbb;
     border: 1px solid #ccc;
     padding: 0;
+
     &:before {
       background-position: 8px 2px;
     }
@@ -360,7 +411,7 @@ header {
 .description {
   display: none;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 577px) {
     display: inline-block;
     padding: 0 4px;
   }
@@ -368,14 +419,23 @@ header {
 
 .legend-toggle {
   position: relative;
-  font-size: 1.6rem;
   min-width: 25px;
   border-radius: 25%;
   color: #000;
-  margin-right: 10px;
+  font-size: 2.5rem;
+  padding: 0 5px 0 9px;
+  margin-right: 0;
+  opacity: 1;
+  transition: opacity 2s ease;
+
+  @media screen and (min-width: 768px) {
+    min-width: 38px;
+
+  }
 
   @media screen and (min-width: 1200px) {
-    display: none;
+    opacity: 0;
+    transition: opacity 2s ease;
   }
 
   &.legend-button-highlighted {
@@ -383,58 +443,80 @@ header {
 
     .bi:before {
       color: green;
-      font-size: 1.7rem;
+      font-size: 2rem;
       font-weight: 700 !important;
+      padding: 4px;
     }
   }
+
+  a {
+    color: #000;
+  }
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  padding-right: 7px;
 }
 
 #color-button {
   background-color: transparent;
-  width: 25px;
-  height: 25px;
-  border-radius: 25%;
   min-width: unset;
-  border: 1px solid #aaa;
-  background: linear-gradient(45deg,
+  display: none;
+
+  &:before {
+    content: "";
+    background-image: url('/src/assets/images/color_palette.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 43px;
+    height: 43px;
+    display: block;
+  }
+
+  /*   background: linear-gradient(45deg,
       indigo 17%,
       red 17% 34%,
       orange 34% 51%,
       yellow 51% 68%,
       green 68% 84%,
-      blue 84%);
-
-  &:before {
-    color: #000;
-    font-size: 1.2rem;
-  }
+      blue 84%); */
 }
 
 #bw-button {
-  width: 25px;
-  height: 25px;
-  min-width: unset;
 
   &:before {
     color: #000;
-    font-size: 1.6rem;
-    vertical-align: 0;
+    font-size: 2.4rem;
   }
 }
 
 @media screen and (max-width: 400px) {
 
-  .legend-toggle,
-  #color-button,
-  #bw-button {
+  #color-button {
     font-size: 1rem;
-    min-width: 15px;
+    min-width: 35px;
+    min-height: 35px;
     padding: 0;
   }
 
-  .legend-toggle {
-    font-size: 1.3rem;
-    padding: 0 5px 0 9px;
-    margin-right: 0;
+}
+
+.bw {
+
+  .topRank1,
+  .topRank2to5,
+  .topRank6to10,
+  .botRank1,
+  .botRank2to5,
+  .botRank6to10 {
+    background-color: #fff;
+    color: #000;
+    font-weight: normal;
+  }
+
+  tbody tr:nth-child(odd) td {
+    background-color: #ddd;
   }
 }

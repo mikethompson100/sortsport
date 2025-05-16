@@ -39,59 +39,59 @@ td {
   }
 }
 
-  .rankContainer {
-    display: none;
-    background-color: #eee;
-    box-shadow: none;
-    font-size: 1rem;
+.rankContainer {
+  display: none;
+  background-color: #eee;
+  box-shadow: none;
+  font-size: 1rem;
 
-    div {
-      border: 1px solid #000;
+  div {
+    border: 1px solid #000;
 
-      .mobileHide {
-        display: none;
+    .mobileHide {
+      display: none;
 
-        @media screen and (min-width: 768px) {
-          display: inline-block;
-        }
+      @media screen and (min-width: 768px) {
+        display: inline-block;
       }
     }
   }
+}
 
-  .topRank1 {
-    background-color: red;
-    color: white;
-    font-weight: bold;
-  }
+.topRank1 {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
 
-  .topRank2to5 {
-    background-color: orange;
-    color: black;
-  }
+.topRank2to5 {
+  background-color: orange;
+  color: black;
+}
 
-  .topRank6to10 {
-    background-color: yellow;
-  }
+.topRank6to10 {
+  background-color: yellow;
+}
 
-  .botRank6to10 {
-    background-color: cyan;
-  }
+.botRank6to10 {
+  background-color: cyan;
+}
 
-  .botRank2to5 {
-    background-color: blue;
-    color: white;
-  }
+.botRank2to5 {
+  background-color: blue;
+  color: white;
+}
 
-  .botRank1 {
-    background-color: navy;
-    color: white;
-    font-weight: bold;
+.botRank1 {
+  background-color: navy;
+  color: white;
+  font-weight: bold;
 
-    .bi.bi-chevron-right {
-      padding: 0;
+  .bi.bi-chevron-right {
+    padding: 0;
 
-      &:before {
-        transform: rotate(360deg);
-      }
+    &:before {
+      transform: rotate(360deg);
     }
   }
+}

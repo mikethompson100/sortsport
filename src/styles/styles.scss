@@ -5,16 +5,21 @@
   padding: 5px 5px 5px 0;
 
   @media screen and (min-width: 768px) {
-    display: flex;
+    /*     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column; */
+
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1100px;
   }
 
   >table {
     border-collapse: collapse;
-    margin-top: 44px;
+    margin-top: 66px;
     display: flex;
     width: 1116px;
+
     @media screen and (min-width: 768px) {
       width: 895px
     }
@@ -28,10 +33,11 @@
       display: none;
       box-shadow: none;
 
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 992px) {
         display: block;
         visibility: hidden;
-      }      
+      }
+
       @media screen and (min-width: 1200px) {
         visibility: visible;
       }
@@ -42,12 +48,12 @@
     .columnHeadings {
       z-index: 2;
       position: sticky;
-      top: 50px;
+      top: 71px;
 
       td:nth-child(1) {
         display: none;
 
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 992px) {
           box-shadow: none;
           display: block;
         }
@@ -57,7 +63,7 @@
 
       .legendColumn {
         position: fixed;
-        top: 70px;
+        top: 69px;
         box-shadow: none;
         background-color: #eee;
         border: 1px solid #000;
@@ -187,18 +193,15 @@
 header {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   z-index: 100;
   font-size: 1.5rem;
-  height: 49px;
-  border-bottom: 1px solid #ddd;
+  height: 71px;
   background: #fff;
   display: flex;
   align-items: center;
 
   @media screen and (min-width: 768px) {
-    height: 44px;
     width: 1200px;
   }
 
@@ -220,6 +223,10 @@ header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+
+  @media screen and (min-width: 768px) {
+    max-width: none;
+  }
 }
 
 .dimmed {
@@ -230,11 +237,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border: 1px solid #7c7;
   width: 30vw;
-  background-color: #eee;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 12px;
+  font-size: 1.3rem;
 
   @media screen and (min-width: 768px) {
     font-size: 1.3rem;
@@ -243,7 +249,7 @@ header {
 
   a {
     margin-left: 3px;
-    padding: 5px 2px 0px 2px;
+    padding: 5px 3px 0px 3px;
     border-radius: 5px;
 
     .categorytext {
@@ -254,12 +260,8 @@ header {
       }
     }
 
-    @media screen and (orientation: landscape) {
+    @media screen and (max-width: 767px) and (orientation: landscape) {
       padding: 9px 5px 0px 5px;
-    }
-
-    @media screen and (max-width: 400px) {
-      padding: 5px 2px 0px 2px;
     }
   }
 
@@ -271,16 +273,18 @@ header {
 }
 
 .hitting {
+/*   width: 44px;
+  height: 44px; */
 
   &:before {
     content: "";
     background-image: url('/src/assets/images/batter.jpg');
     display: inline-block;
     background-size: contain;
-    width: 26px;
-    height: 24px;
+    width: 41px;
+    height: 41px;
     background-repeat: no-repeat;
-    background-position: 6px 0;
+    background-position: 9px 0px;
     background-color: #fff;
     border-radius: 5px;
 
@@ -291,24 +295,37 @@ header {
 
   &.active {
     color: #fff;
+    padding: 3px 3px 1px 3px;
+
+/*     @media screen and (max-width:430px) {
+      padding-right: 3px;
+    } */
   }
 
   &.inactive {
     color: #777;
+    border: 1px solid #ccc;
+    padding: 0;
+
+    &:before {
+      background-position: 10px 2px;
+    }
   }
 }
 
 .pitching {
+/*   width: 44px;
+  height: 44px; */
 
   &:before {
     content: "";
-    background-image: url('/src/assets/images/pitcher.webp');
+    background-image: url('/src/assets/images/pitcher.jpg');
     display: inline-block;
     background-size: contain;
-    width: 26px;
-    height: 24px;
+    width: 41px;
+    height: 41px;
     background-repeat: no-repeat;
-    background-position: 4px 0;
+    background-position: 4px 2px;
     background-color: #fff;
     border-radius: 5px;
 
@@ -319,10 +336,24 @@ header {
 
   &.active {
     color: #fff;
+    padding: 3px 3px 1px 3px;
+
+/*     @media screen and (max-width:430px) {
+      padding-right: 3px;
+    } */
+
+    &:before {
+      background-position: 6px 1px;
+    }
   }
 
   &.inactive {
     color: #777;
+    border: 1px solid #ccc;
+    padding: 0;
+    &:before {
+      background-position: 8px 2px;
+    }
   }
 }
 
@@ -403,6 +434,7 @@ header {
 
   .legend-toggle {
     font-size: 1.3rem;
-    padding: 0 5px;
+    padding: 0 5px 0 9px;
+    margin-right: 0;
   }
 }

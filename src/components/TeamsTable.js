@@ -92,31 +92,31 @@ function TeamsTable(props) {
     <>
       <div id="modal-root" className={`${(isLegendActivated) ? 'opacity-50' : 'opacity-0'}`}></div>
       <header>
-              <div className='brand'>
-                S0RTSP0RT
-              </div>
-              <div className="headerContainer">
-                <div className={`season ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
-                  {isMobile ? "'" + String(props.result.data[0].season).slice(-2) : props.result.data[0].season}<span className="description">season</span>
-                  <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={`hitting ${group === "hitting" ? "active" : "inactive"}`}><span className="categorytext">Hitting</span></a>
-                  <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={`pitching ${group === "pitching" ? "active" : "inactive"}`}><span className="categorytext">Pitching</span></a>
-                </div>
-                <div className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
-                  <a id="legend-button" href="#" onClick={() => {
-                    setIsLegendActivated(!isLegendActivated);
-                  }}>
-                    <i className="bi bi-info-circle"></i>
-                  </a>
-                </div>
-                <div id="color-button" className={`bi bi-palette ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
-                </div>
-                <div id="bw-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
-                  <a href="#" onClick={() => {
-    
-                  }}>
-                  </a>
-                </div>
-              </div>
+        <div className='brand'>
+          S0RTSP0RT
+        </div>
+        <div className="headerContainer">
+          <div className={`season ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+            {isMobile ? "'" + String(props.result.data[0].season).slice(-2) : props.result.data[0].season}<span className="description">season</span>
+            <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={`hitting ${group === "hitting" ? "active" : "inactive"}`}><span className="categorytext">Hitting</span></a>
+            <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={`pitching ${group === "pitching" ? "active" : "inactive"}`}><span className="categorytext">Pitching</span></a>
+          </div>
+          <div className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
+            <a id="legend-button" href="#" onClick={() => {
+              setIsLegendActivated(!isLegendActivated);
+            }}>
+              <i className="bi bi-info-circle"></i>
+            </a>
+          </div>
+          <div id="color-button" className={`bi bi-palette ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+          </div>
+          <div id="bw-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
+            <a href="#" onClick={() => {
+
+            }}>
+            </a>
+          </div>
+        </div>
       </header>
       {props.result.loading && <p>Loading...</p>} {/* Show loading message */}
       {props.result.error && <p>Error: {props.result.error}</p>} {/* Show error message */}

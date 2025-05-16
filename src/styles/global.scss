@@ -3,7 +3,7 @@
   background-color: green !important;
   font-weight: bold;
   margin: 3px 0;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
 }
 
 .bi-chevron-down::before {
@@ -39,7 +39,6 @@ td {
   }
 }
 
-/* .colorTds { */
   .rankContainer {
     display: none;
     background-color: #eee;
@@ -96,4 +95,3 @@ td {
       }
     }
   }
-/* } */

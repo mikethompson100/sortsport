@@ -53,6 +53,7 @@
         @media screen and (min-width: 992px) {
           box-shadow: none;
           display: block;
+          margin-right: 20px;
         }
       }
 
@@ -60,14 +61,20 @@
 
       .legendColumn {
         position: fixed;
-        top: 71px;
+        top: 72px;
         box-shadow: none;
         background-color: #eee;
         border: 1px solid #000;
 
-        * {
+        .legendTitle {
+          width: 57px;
+          height: 24.1px;
+          background-color: #eee;
+        }
+
+        div {
           border-bottom: 1px solid #000;
-          height: 33px;
+          height: 23.9px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -430,7 +437,6 @@ header {
 
   @media screen and (min-width: 768px) {
     min-width: 38px;
-
   }
 
   @media screen and (min-width: 1200px) {
@@ -438,19 +444,20 @@ header {
     transition: opacity 2s ease;
   }
 
-  &.legend-button-highlighted {
-    border: 1px solid green;
-
-    .bi:before {
-      color: green;
-      font-size: 2rem;
-      font-weight: 700 !important;
-      padding: 4px;
-    }
-  }
 
   a {
     color: #000;
+
+    @media screen and (min-width: 1200px) {
+      pointer-events: none;
+    }
+  }
+
+  &.legend-button-highlighted {
+
+    .bi:before {
+      color: green;
+    }
   }
 }
 
@@ -475,20 +482,24 @@ header {
     display: block;
   }
 
-  /*   background: linear-gradient(45deg,
-      indigo 17%,
-      red 17% 34%,
-      orange 34% 51%,
-      yellow 51% 68%,
-      green 68% 84%,
-      blue 84%); */
 }
 
 #bw-button {
+  position: relative;
 
   &:before {
     color: #000;
     font-size: 2.4rem;
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    z-index: -1;
+  }
+
+  a {
+    width: 50px;
+    height: 50px;
+    display: block;
   }
 }
 

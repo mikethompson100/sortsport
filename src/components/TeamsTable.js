@@ -118,9 +118,7 @@ function TeamsTable(props) {
           <div id="color-button" className={`${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
           </div>
           <div id="bw-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
-            <a href="#" onClick={() => {
-
-            }}>
+            <a href="#" onClick={() => { setColorful(!colorful);}}>
             </a>
           </div>
         </div>
@@ -132,8 +130,8 @@ function TeamsTable(props) {
           <tbody>
             <tr className="columnHeadings">
               <td>
-                <div className="legendColumn">
-                  <span>Ranks</span>
+                  <div className="legendColumn">
+                  <div className="legendTitle">Ranks</div>
                   <div className="topRank1">1</div>
                   <div className="topRank2to5">2</div>
                   <div className="topRank2to5">3</div>
@@ -144,6 +142,14 @@ function TeamsTable(props) {
                   <div className="topRank6to10">8</div>
                   <div className="topRank6to10">9</div>
                   <div className="topRank6to10">10</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
                   <div>...</div>
                   <div className="botRank6to10">20</div>
                   <div className="botRank6to10">21</div>
@@ -201,7 +207,7 @@ function TeamsTable(props) {
             <tr className="columnHeadings">
               <td>
                 <div className="legendColumn">
-                  <span>Ranks</span>
+                  <div className="legendTitle">Ranks</div>
                   <div className="topRank1">1</div>
                   <div className="topRank2to5">2</div>
                   <div className="topRank2to5">3</div>
@@ -212,6 +218,14 @@ function TeamsTable(props) {
                   <div className="topRank6to10">8</div>
                   <div className="topRank6to10">9</div>
                   <div className="topRank6to10">10</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
+                  <div>...</div>
                   <div>...</div>
                   <div className="botRank6to10">20</div>
                   <div className="botRank6to10">21</div>
@@ -275,15 +289,15 @@ function TeamsTable(props) {
           <div className="topRank6to10">8</div>
           <div className="topRank6to10">9</div>
           <div className="topRank6to10">10</div>
-          <div className="topRank botRank">11</div>
-          <div className="topRank botRank">12</div>
-          <div className="topRank botRank">13</div>
-          <div className="topRank botRank">14</div>
-          <div className="topRank botRank">15</div>
-          <div className="topRank botRank">16</div>
-          <div className="topRank botRank">17</div>
-          <div className="topRank botRank">18</div>
-          <div className="topRank botRank">19</div>
+          <div className="topRank botRank">...</div>
+          <div className="topRank botRank">...</div>
+          <div className="topRank botRank">...</div>
+          <div className="topRank botRank">...</div>
+          <div className="topRank botRank">...</div>
+          <div className="topRank botRank">...</div>
+          <div className="topRank botRank">...</div>
+          <div className="topRank botRank">...</div>
+          <div className="topRank botRank">...</div>
           <div className="botRank6to10">20</div>
           <div className="botRank6to10">21</div>
           <div className="botRank6to10">22</div>

@@ -22,12 +22,13 @@
 
     @media screen and (min-width: 992px) {
       justify-content: center;
-      width: 100%;
+      width: 1072px;
     }
 
     .legendColumn {
       display: none;
       box-shadow: none;
+      border: none;
       visibility: hidden;
 
       @media screen and (min-width: 992px) {
@@ -41,23 +42,27 @@
 
     }
 
-
     .columnHeadings {
       z-index: 2;
       position: sticky;
       top: 71px;
+      box-shadow: none;
 
       td:nth-child(1) {
         display: none;
 
+        &.hideDesktopLegend .legendColumn {
+          display: none;
+        }
+
         @media screen and (min-width: 992px) {
           box-shadow: none;
+          border: none;
           display: block;
           margin-right: 20px;
         }
       }
 
-      box-shadow: none;
 
       .legendColumn {
         position: fixed;
@@ -86,7 +91,7 @@
         position: sticky;
         left: 0;
         z-index: 2;
-        box-shadow: inset 0 0 0 1px #000;
+        border: 1px solid #333;
         white-space: nowrap;
         background-color: #fff;
 
@@ -119,6 +124,7 @@
         a {
           all: unset;
           min-width: 0%;
+          cursor: pointer;
 
           @media screen and (min-width: 768px) {
             min-width: 90%;
@@ -133,6 +139,7 @@
         background-color: #ddd;
         z-index: 1;
         border: none;
+        cursor: pointer;
 
         &.active {
 
@@ -163,8 +170,7 @@
     }
   }
 
-  #popup-legend-modal {
-    position: fixed;
+  #popup-legend-modal {position: fixed;
     top: 10.7vh;
     left: 43vw;
     background-color: #fff;
@@ -172,9 +178,12 @@
     padding: 5px;
     border: 1px solid #000;
     overflow: auto;
-    height: auto;
+    height: 76vh;
     z-index: 100;
     width: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 
     @media screen and (min-width: 1200px) {
       display: none;
@@ -190,7 +199,6 @@
       display: table-cell;
       display: flex;
       justify-content: center;
-      font-size: .8rem;
 
       @media screen and (min-width: 768px) {
         font-size: 1rem;
@@ -231,7 +239,7 @@ header {
   justify-content: space-between;
 
   @media screen and (min-width: 768px) {
-    max-width: 1120px;
+    max-width: 1154px;
   }
 
 
@@ -242,10 +250,19 @@ header {
   white-space: nowrap;
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
 
   @media screen and (min-width: 768px) {
     font-size: 1.2rem;
+    margin-right: 11px;
+  }
+}
+
+.headerCenter {
+  max-width: 250px;
+
+  @media screen and (min-width: 768px) {
+    width: 400px;
   }
 }
 
@@ -282,21 +299,14 @@ header {
   @media screen and (min-width: 577px) {
     width: 155px;
   }
-}
-
-/* 
-.headerContainer {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  @media screen and (min-width: 768px) {
-    max-width: none;
+  @media screen and (min-width: 1200px) {
+    margin-left: 0;
   }
-} */
+}
 
 .dimmed {
   opacity: .2;
+  pointer-events: none;
 
   @media screen and (min-width: 1200px) {
     opacity: 1;
@@ -306,10 +316,9 @@ header {
 .season {
   margin-right: 12px;
   font-size: 1.3rem;
-  width: 126px;
+  max-width: 126px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
 
   @media screen and (min-width: 768px) {
     font-size: 1.3rem;
@@ -366,7 +375,7 @@ header {
   }
 
   &.inactive {
-    color: #bbb;
+    color: #667;
     border: 1px solid #ccc;
     padding: 0;
 
@@ -405,7 +414,7 @@ header {
   }
 
   &.inactive {
-    color: #bbb;
+    color: #667;
     border: 1px solid #ccc;
     padding: 0;
 
@@ -426,6 +435,7 @@ header {
 
 .legend-toggle {
   position: relative;
+  top: -1px;
   min-width: 25px;
   border-radius: 25%;
   color: #000;
@@ -470,7 +480,15 @@ header {
 #color-button {
   background-color: transparent;
   min-width: unset;
-  display: none;
+  position: relative;
+  margin-left: 54px;
+  @media screen and (max-width: 400px) {
+      font-size: 1rem;
+      min-width: 35px;
+      min-height: 35px;
+      padding: 0;
+      margin-left: 54px;
+  }
 
   &:before {
     content: "";
@@ -479,6 +497,17 @@ header {
     background-repeat: no-repeat;
     width: 43px;
     height: 43px;
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    z-index: -1;
+    transform: rotate(-11deg);
+  }
+
+  a {
+    width: 50px;
+    height: 50px;
     display: block;
   }
 
@@ -503,18 +532,13 @@ header {
   }
 }
 
-@media screen and (max-width: 400px) {
 
-  #color-button {
-    font-size: 1rem;
-    min-width: 35px;
-    min-height: 35px;
-    padding: 0;
+.App>table.bw {
+
+  .left {
+    border-left: 1px solid #777;
+    border-right: 1px solid #777;
   }
-
-}
-
-.bw {
 
   .topRank1,
   .topRank2to5,
@@ -527,7 +551,25 @@ header {
     font-weight: normal;
   }
 
+  tbody tr.columnHeadings:first-child td.hideDesktopLegend {
+    visibility: hidden;
+  }
+
   tbody tr:nth-child(odd) td {
     background-color: #ddd;
+
   }
+
+  tbody tr:nth-child(even) td {
+    background-color: #fff;
+
+  }
+
+  @media screen and (min-width: 1200px) {
+    .legendColumn {
+      visibility: hidden;
+    }
+  }
+
+
 }

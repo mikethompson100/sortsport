@@ -108,19 +108,15 @@ function TeamsTable(props) {
           </div>
         </div>
         <div className="headerRight">
-          <div className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
-            <a id="legend-button" href="#" onClick={() => {
-              setIsLegendActivated(!isLegendActivated);
-            }}>
-              <i className="bi bi-info-circle"></i>
-            </a>
+          {colorful && <div className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
+            <a id="legend-button" href="#" onClick={() => { setIsLegendActivated(!isLegendActivated); }}><i className="bi bi-info-circle"></i><span className='visually-hidden'>Toggle link to show or hide color legend popup</span></a>
           </div>
-          <div id="color-button" className={`${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
-          </div>
-          <div id="bw-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}>
-            <a href="#" onClick={() => { setColorful(!colorful);}}>
-            </a>
-          </div>
+          }
+          {!colorful && <div id="color-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}><a href="#" onClick={() => { setColorful(!colorful); }}><span className='visually-hidden'>Toggle link to turn on or off the color palette mode</span></a></div>
+          }
+          {colorful && <div id="bw-button" className={`bi bi-circle-half ${(isLegendActivated) ? 'dimmed' : ''}`}><a href="#" onClick={() => { setColorful(!colorful); }}><span className='visually-hidden'>Toggle link to turn on or off the black and white mode</span></a>
+            </div>
+          }
         </div>
       </header>
       {props.result.loading && <p>Loading...</p>} {/* Show loading message */}
@@ -129,8 +125,8 @@ function TeamsTable(props) {
         <table className={!colorful && "bw"}>
           <tbody>
             <tr className="columnHeadings">
-              <td>
-                  <div className="legendColumn">
+              <td className={!colorful && "hideDesktopLegend"}>
+                <div className="legendColumn">
                   <div className="legendTitle">Ranks</div>
                   <div className="topRank1">1</div>
                   <div className="topRank2to5">2</div>
@@ -202,10 +198,10 @@ function TeamsTable(props) {
         </table>
       )}
       {props.result.data && (group === "pitching") && ( /* Render data when available */
-        <table>
+        <table className={!colorful && "bw"}>
           <tbody>
             <tr className="columnHeadings">
-              <td>
+              <td className={!colorful && "hideDesktopLegend"}>
                 <div className="legendColumn">
                   <div className="legendTitle">Ranks</div>
                   <div className="topRank1">1</div>

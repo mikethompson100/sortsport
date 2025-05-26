@@ -170,7 +170,8 @@
     }
   }
 
-  #popup-legend-modal {position: fixed;
+  #popup-legend-modal {
+    position: fixed;
     top: 10.7vh;
     left: 43vw;
     background-color: #fff;
@@ -275,8 +276,10 @@ header {
   }
 }
 
-.sortsport {
+h1.sortsport, h1.ss {
   display: none;
+  font-size: 1.3rem;
+  margin:0;
 
   @media screen and (min-width: 577px) {
     display: block;
@@ -302,6 +305,25 @@ header {
   @media screen and (min-width: 1200px) {
     margin-left: 0;
   }
+}
+
+.diagonal-strike {
+  position: relative;
+  right: 1px;
+  display: inline-block;transform: scaleX(0.8); 
+}
+
+.diagonal-strike::after {
+  content: "";
+  position: absolute;
+  top: 43%;
+  left: 0px;
+  width: 72%;
+  height: 2px;
+  background: #000;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  font-stretch: condensed;
 }
 
 .dimmed {

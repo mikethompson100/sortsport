@@ -95,7 +95,10 @@ function TeamsTable(props) {
       <header>
         <div className="headerLeft">
           <span className='brand'>
-            <span className="ss">S.S.</span><span className="sortsport">S0RTSP0RT</span>
+            <span className="ss">S.S.</span>
+            <h1 className="sortsport">
+              S<span className="diagonal-strike">O</span>RTSP<span className="diagonal-strike">O</span>RT
+            </h1>
           </span>
           <span>
             {isMobile ? "'" + String(props.result.data[0].season).slice(-2) : props.result.data[0].season}<span className="description">season</span>
@@ -115,17 +118,17 @@ function TeamsTable(props) {
           {!colorful && <div id="color-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}><a href="#" onClick={() => { setColorful(!colorful); }}><span className='visually-hidden'>Toggle link to turn on or off the color palette mode</span></a></div>
           }
           {colorful && <div id="bw-button" className={`bi bi-circle-half ${(isLegendActivated) ? 'dimmed' : ''}`}><a href="#" onClick={() => { setColorful(!colorful); }}><span className='visually-hidden'>Toggle link to turn on or off the black and white mode</span></a>
-            </div>
+          </div>
           }
         </div>
       </header>
       {props.result.loading && <p>Loading...</p>} {/* Show loading message */}
       {props.result.error && <p>Error: {props.result.error}</p>} {/* Show error message */}
       {props.result.data && (group === "hitting") && ( /* Render data when available */
-        <table className={!colorful && "bw"}>
+        <table className={colorful ? "" : "bw"}>
           <tbody>
             <tr className="columnHeadings">
-              <td className={!colorful && "hideDesktopLegend"}>
+              <td className={colorful ? "" : "hideDesktopLegend"}>
                 <div className="legendColumn">
                   <div className="legendTitle">Ranks</div>
                   <div className="topRank1">1</div>
@@ -198,10 +201,10 @@ function TeamsTable(props) {
         </table>
       )}
       {props.result.data && (group === "pitching") && ( /* Render data when available */
-        <table className={!colorful && "bw"}>
+        <table className={colorful ? "" : "bw"}>
           <tbody>
             <tr className="columnHeadings">
-              <td className={!colorful && "hideDesktopLegend"}>
+              <td className={colorful ? "" : "hideDesktopLegend"}>
                 <div className="legendColumn">
                   <div className="legendTitle">Ranks</div>
                   <div className="topRank1">1</div>

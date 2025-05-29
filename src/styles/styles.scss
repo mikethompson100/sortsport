@@ -172,22 +172,84 @@
 
   #popup-legend-modal {
     position: fixed;
-    top: 10.7vh;
-    left: 43vw;
+    width: 91vw;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #fff;
     text-align: center;
     padding: 5px;
     border: 1px solid #000;
     overflow: auto;
-    height: 76vh;
     z-index: 100;
-    width: 80px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    flex-direction: row;
+
+    @media screen and (orientation: landscape) {
+      top: 57%;
+      height: 70vh;
+    }
+
+    @media screen and (min-width: 768px) {
+      top: 46%;
+      height: 72vh;
+      @media screen and (orientation: landscape) {
+        top: 53%;
+        height: 83vh;
+      }
+    }
 
     @media screen and (min-width: 1200px) {
       display: none;
+    }
+
+    .legendColumnHeadings {
+      font-size: .9rem;
+      padding: 1px 17px 17px 30px;
+      display: flex;
+      flex-direction: column;
+
+      @media screen and (max-width: 360px) {
+        padding-top: 17px;
+        padding-left: 12px;
+        font-size: .75em;
+        display: block;
+      }
+
+      @media screen and (min-width: 768px) {
+        padding: 10px 25px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        flex-grow: 1;
+        font-size: 1rem;
+      }
+      .lCHColumn {
+        padding-bottom: 20px;
+
+        .lCHContainer {
+          display: flex;
+
+          div:nth-child(1) {
+            min-width: 44px;
+            text-align: left;
+
+            @media screen and (min-width: 768px) {
+              min-width: 59px;
+            }
+          }
+
+          div:nth-child(2) {
+            text-align: left;
+          }
+
+          @media screen and (min-width: 768px) {
+            padding-bottom: 5px;
+          }
+        }
+
+      }
     }
 
     [class^="topRank"],
@@ -200,6 +262,7 @@
       display: table-cell;
       display: flex;
       justify-content: center;
+      font-size: 0.7rem;
 
       @media screen and (min-width: 768px) {
         font-size: 1rem;
@@ -276,10 +339,11 @@ header {
   }
 }
 
-h1.sortsport, h1.ss {
+h1.sortsport,
+h1.ss {
   display: none;
   font-size: 1.3rem;
-  margin:0;
+  margin: 0;
 
   @media screen and (min-width: 577px) {
     display: block;
@@ -302,6 +366,7 @@ h1.sortsport, h1.ss {
   @media screen and (min-width: 577px) {
     width: 155px;
   }
+
   @media screen and (min-width: 1200px) {
     margin-left: 0;
   }
@@ -310,7 +375,8 @@ h1.sortsport, h1.ss {
 .diagonal-strike {
   position: relative;
   right: 1px;
-  display: inline-block;transform: scaleX(0.8); 
+  display: inline-block;
+  transform: scaleX(0.8);
 }
 
 .diagonal-strike::after {
@@ -503,13 +569,12 @@ h1.sortsport, h1.ss {
   background-color: transparent;
   min-width: unset;
   position: relative;
-  margin-left: 54px;
+
   @media screen and (max-width: 400px) {
-      font-size: 1rem;
-      min-width: 35px;
-      min-height: 35px;
-      padding: 0;
-      margin-left: 54px;
+    font-size: 1rem;
+    min-width: 35px;
+    min-height: 35px;
+    padding: 0;
   }
 
   &:before {

@@ -111,11 +111,10 @@ function TeamsTable(props) {
           </div>
         </div>
         <div className="headerRight">
-          {colorful && <div className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
+          <div className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
             <a id="legend-button" href="#" onClick={() => { setIsLegendActivated(!isLegendActivated); }}><i className="bi bi-info-circle"></i><span className='visually-hidden'>Toggle link to show or hide color legend popup</span></a>
           </div>
-          }
-          {!colorful && <div id="color-button" className={`bi bi-circle-half ${(isLegendActivated && isMobile) ? 'dimmed' : ''}`}><a href="#" onClick={() => { setColorful(!colorful); }}><span className='visually-hidden'>Toggle link to turn on or off the color palette mode</span></a></div>
+          {!colorful && <div id="color-button" className={`bi bi-circle-half ${(isLegendActivated) ? 'dimmed' : ''}`}><a href="#" onClick={() => { setColorful(!colorful); }}><span className='visually-hidden'>Toggle link to turn on or off the color palette mode</span></a></div>
           }
           {colorful && <div id="bw-button" className={`bi bi-circle-half ${(isLegendActivated) ? 'dimmed' : ''}`}><a href="#" onClick={() => { setColorful(!colorful); }}><span className='visually-hidden'>Toggle link to turn on or off the black and white mode</span></a>
           </div>
@@ -277,37 +276,76 @@ function TeamsTable(props) {
       )}
       {isLegendShown && isLegendActivated && (
         <div id="popup-legend-modal">
-          <span><strong>Ranks</strong></span>
-          <div className="topRank1">1</div>
-          <div className="topRank2to5">2</div>
-          <div className="topRank2to5">3</div>
-          <div className="topRank2to5">4</div>
-          <div className="topRank2to5">5</div>
-          <div className="topRank6to10">6</div>
-          <div className="topRank6to10">7</div>
-          <div className="topRank6to10">8</div>
-          <div className="topRank6to10">9</div>
-          <div className="topRank6to10">10</div>
-          <div className="topRank botRank">...</div>
-          <div className="topRank botRank">...</div>
-          <div className="topRank botRank">...</div>
-          <div className="topRank botRank">...</div>
-          <div className="topRank botRank">...</div>
-          <div className="topRank botRank">...</div>
-          <div className="topRank botRank">...</div>
-          <div className="topRank botRank">...</div>
-          <div className="topRank botRank">...</div>
-          <div className="botRank6to10">20</div>
-          <div className="botRank6to10">21</div>
-          <div className="botRank6to10">22</div>
-          <div className="botRank6to10">23</div>
-          <div className="botRank6to10">24</div>
-          <div className="botRank2to5">25</div>
-          <div className="botRank2to5">26</div>
-          <div className="botRank2to5">27</div>
-          <div className="botRank2to5">28</div>
-          <div className="botRank2to5">29</div>
-          <div className="botRank1">30</div>
+          <div>
+            <span><strong>Ranks</strong></span>
+            <div className="topRank1">1</div>
+            <div className="topRank2to5">2</div>
+            <div className="topRank2to5">3</div>
+            <div className="topRank2to5">4</div>
+            <div className="topRank2to5">5</div>
+            <div className="topRank6to10">6</div>
+            <div className="topRank6to10">7</div>
+            <div className="topRank6to10">8</div>
+            <div className="topRank6to10">9</div>
+            <div className="topRank6to10">10</div>
+            <div className="topRank botRank">...</div>
+            <div className="topRank botRank">...</div>
+            <div className="topRank botRank">...</div>
+            <div className="topRank botRank">...</div>
+            <div className="topRank botRank">...</div>
+            <div className="topRank botRank">...</div>
+            <div className="topRank botRank">...</div>
+            <div className="topRank botRank">...</div>
+            <div className="topRank botRank">...</div>
+            <div className="botRank6to10">20</div>
+            <div className="botRank6to10">21</div>
+            <div className="botRank6to10">22</div>
+            <div className="botRank6to10">23</div>
+            <div className="botRank6to10">24</div>
+            <div className="botRank2to5">25</div>
+            <div className="botRank2to5">26</div>
+            <div className="botRank2to5">27</div>
+            <div className="botRank2to5">28</div>
+            <div className="botRank2to5">29</div>
+            <div className="botRank1">30</div>
+          </div>
+
+          <div className="legendColumnHeadings">
+            <div className="lCHColumn">
+                <div className="lCHContainer"><strong>Hitting</strong></div>
+                <div className="lCHContainer"><div>Runs</div><div>= Runs</div></div>
+                <div className="lCHContainer"><div>Hit</div><div>= Hits</div></div>
+                <div className="lCHContainer"><div>2b</div><div>= Doubles</div></div>
+                <div className="lCHContainer"><div>3b</div><div>= Triples</div></div>
+                <div className="lCHContainer"><div>Hr</div><div>= Homeruns</div></div>
+                <div className="lCHContainer"><div>Rbi</div><div>= Runs Batted In</div></div>
+                <div className="lCHContainer"><div>Abph</div><div>= At Bat Per Homerun</div></div>
+                <div className="lCHContainer"><div>Bb</div><div>= Walks</div></div>
+                <div className="lCHContainer"><div>Sb</div><div>= Stolen Bases</div></div>
+                <div className="lCHContainer"><div>Avg</div><div>= Batting Average</div></div>
+                <div className="lCHContainer"><div>So</div><div>= Strikeouts</div></div>
+                <div className="lCHContainer"><div>Go</div><div>= Groundouts</div></div>
+                <div className="lCHContainer"><div>Ao</div><div>= Airouts</div></div>
+                <div className="lCHContainer"><div>Gidp</div><div>= Ground into Double Plays</div></div>
+            </div>
+            <div className="lCHColumn">
+                <div className="lCHContainer"><strong>Pitching</strong></div>
+                <div className="lCHContainer"><div>Era</div><div>= Earned Run Average</div></div>
+                <div className="lCHContainer"><div>Runs</div><div>= Runs given up</div></div>
+                <div className="lCHContainer"><div>Hr</div><div>= Homeruns given up</div></div>
+                <div className="lCHContainer"><div>So</div><div>= Strikeouts</div></div>
+                <div className="lCHContainer"><div>Bb</div><div>= Walks given up</div></div>
+                <div className="lCHContainer"><div>SoWr</div><div>= Strikeouts to Walks ratio</div></div>
+                <div className="lCHContainer"><div>Go</div><div>= Groundouts</div></div>
+                <div className="lCHContainer"><div>Ao</div><div>= Airouts</div></div>
+                <div className="lCHContainer"><div>GoAo</div><div>= Groundouts to Airouts ratio</div></div>
+                <div className="lCHContainer"><div>Avg</div><div>= Opponent's Batting Average</div></div>
+                <div className="lCHContainer"><div>Sb</div><div>= Stolen Bases allowed</div></div>
+                <div className="lCHContainer"><div>Cs</div><div>= Caught Stealing</div></div>
+                <div className="lCHContainer"><div>SbP</div><div>= Stolen base percentage</div></div>
+                <div className="lCHContainer"><div>Gidp</div><div>= Ground into Double Plays</div></div>
+            </div>
+          </div>
         </div>
       )}
     </>

@@ -1,38 +1,36 @@
 
-export default function getStatClass(rank, ascend) {
+export default function getStatClass(greaterCount, lesserCount, ascend) {
   if (!ascend) {
     switch (true) {
-      case rank === 1:
+      case greaterCount === 0:
         return 'topRank1';
-      case (rank >= 2 && rank <= 5):
+      case greaterCount <= 4:
         return 'topRank2to5';
-      case (rank >= 6 && rank <= 10):
+      case greaterCount <= 9:
         return 'topRank6to10';
-      case (rank >= 20 && rank <= 24):
-        return 'botRank6to10';
-      case (rank >= 25 && rank <= 29):
-        return 'botRank2to5';
-      case (rank === 30):
+      case lesserCount === 0:
         return 'botRank1';
+      case lesserCount <= 4:
+        return 'botRank2to5';
+      case lesserCount <= 9:
+        return 'botRank6to10';
       default: return
     }
   }
-  else if (ascend) {
-    switch (true) {
-      case rank === 1:
-        return 'botRank1';
-      case (rank >= 2 && rank <= 5):
-        return 'botRank2to5';
-      case (rank >= 6 && rank <= 10):
-        return 'botRank6to10';
-      case (rank >= 20 && rank <= 24):
-        return 'topRank6to10';
-      case (rank >= 25 && rank <= 29):
-        return 'topRank2to5';
-      case (rank === 30):
-        return 'topRank1';
-      default: return
-    }
+  switch (true) {
+    case lesserCount === 0:
+      return 'topRank1';
+    case lesserCount <= 4:
+      return 'topRank2to5';
+    case lesserCount <= 9:
+      return 'topRank6to10';
+    case greaterCount === 0:
+      return 'botRank1';
+    case greaterCount <= 4:
+      return 'botRank2to5';
+    case greaterCount <= 9:
+      return 'botRank6to10';
+    default: return
   }
-  else throw new Error("The order is invalid");
+  
 };

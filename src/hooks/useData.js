@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 //import { MLB_STATS_HITTING, MLB_STATS_PITCHING } from '../constants/leagueAPI';
-import rankStats from '../helper/rankStats';
 import hitting from '../data/hitting.json';
 import pitching from '../data/pitching.json';
 import { allHittingColumns, allPitchingColumns } from '../constants/constants';
@@ -31,13 +30,13 @@ function useData() {
                 for (const key in hittingSplit.stat) {
                     if (usedColumn(key, allHittingColumns)) {
                         const value = hittingSplit.stat[key];
-                        team.hitting[key] = { value: value, rank: 0 };
+                        team.hitting[key] = { value: value };
                     }
                 }
                 for (const key in pitchingSplit.stat) {
                     if (usedColumn(key, allPitchingColumns)) {
                         const value = pitchingSplit.stat[key];
-                        team.pitching[key] = { value: value, rank: 0 };
+                        team.pitching[key] = { value: value };
                     }
                 }
                 team.season = hittingSplit.season;
@@ -45,8 +44,7 @@ function useData() {
                 return team
             })
             teamsArray.sort((a, b) => a.team.name.localeCompare(b.team.name));
-            const rankedData = rankStats(teamsArray);
-            setData(rankedData);
+            setData(teamsArray);
         }
         catch (error) {
             console.error("Error fetching data:", error);

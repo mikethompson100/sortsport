@@ -1,7 +1,6 @@
 @import "global.scss";
 
 .App {
-  text-align: left;
   padding: 5px 5px 5px 0;
 
   @media screen and (min-width: 768px) {
@@ -10,262 +9,267 @@
     max-width: 1097px;
   }
 
-  >table {
-    border-collapse: collapse;
-    margin-top: 67px;
-    display: flex;
-    width: 1116px;
+  main {
 
-    @media screen and (min-width: 768px) {
-      width: 895px
-    }
+    >table {
+      border-collapse: collapse;
+      margin-top: 67px;
+      display: flex;
+      width: 1116px;
 
-    @media screen and (min-width: 992px) {
-      justify-content: center;
-      width: 1072px;
-    }
-
-    .legendColumn {
-      display: none;
-      box-shadow: none;
-      border: none;
-      visibility: hidden;
+      @media screen and (min-width: 768px) {
+        width: 895px
+      }
 
       @media screen and (min-width: 992px) {
-        display: block;
+        justify-content: center;
+        width: 1072px;
+      }
+
+      .legendColumn {
+        display: none;
+        box-shadow: none;
+        border: none;
         visibility: hidden;
+
+        @media screen and (min-width: 992px) {
+          display: block;
+          visibility: hidden;
+        }
+
+        @media screen and (min-width: 1200px) {
+          visibility: visible;
+        }
+
+      }
+
+      .columnHeadings {
+        z-index: 2;
+        position: sticky;
+        top: 71px;
+        box-shadow: none;
+
+        td:nth-child(1) {
+          display: none;
+
+          &.hideDesktopLegend .legendColumn {
+            display: none;
+          }
+
+          @media screen and (min-width: 992px) {
+            box-shadow: none;
+            border: none;
+            display: block;
+            margin-right: 20px;
+          }
+        }
+
+
+        .legendColumn {
+          position: fixed;
+          top: 72px;
+          box-shadow: none;
+          background-color: #eee;
+          border: 1px solid #000;
+
+          .legendTitle {
+            width: 57px;
+            height: 24.1px;
+            background-color: #eee;
+          }
+
+          div {
+            border-bottom: 1px solid #000;
+            height: 23.9px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+
+        .team {
+          position: sticky;
+          left: 0;
+          z-index: 2;
+          border: 1px solid #333;
+          white-space: nowrap;
+          background-color: #fff;
+
+          @media screen and (min-width: 768px) {
+            font-size: 1rem;
+          }
+
+          &.active {
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            margin: 3px 0;
+
+            @media screen and (min-width: 768px) {
+              width: 165px;
+              margin: 0;
+            }
+
+            a,
+            a:visited,
+            a:hover,
+            a:active,
+            a:focus {
+              color: #fff;
+              width: 80%;
+              display: inline-block;
+            }
+          }
+
+          a {
+            all: unset;
+            min-width: 0%;
+            cursor: pointer;
+
+            @media screen and (min-width: 768px) {
+              min-width: 90%;
+            }
+
+          }
+        }
+
+        .top {
+          position: sticky;
+          top: 0;
+          background-color: #ddd;
+          z-index: 1;
+          border: none;
+          cursor: pointer;
+
+          &.active {
+
+            a,
+            a:visited,
+            a:hover,
+            a:active,
+            a:focus {
+              color: #fff;
+            }
+          }
+        }
+
+
+      }
+
+      .left {
+        position: sticky;
+        text-align: center;
+
+        @media screen and (min-width: 768px) {
+          text-align: left;
+        }
+
+        left: 0;
+        background-color: #eee;
+        white-space: nowrap;
+      }
+    }
+
+    #popup-legend-modal {
+      position: fixed;
+      width: 91vw;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      text-align: center;
+      padding: 5px;
+      border: 1px solid #000;
+      overflow: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: row;
+
+      @media screen and (orientation: landscape) {
+        top: 57%;
+        height: 70vh;
+      }
+
+      @media screen and (min-width: 768px) {
+        top: 46%;
+        height: 72vh;
+
+        @media screen and (orientation: landscape) {
+          top: 53%;
+          height: 83vh;
+        }
       }
 
       @media screen and (min-width: 1200px) {
-        visibility: visible;
-      }
-
-    }
-
-    .columnHeadings {
-      z-index: 2;
-      position: sticky;
-      top: 71px;
-      box-shadow: none;
-
-      td:nth-child(1) {
         display: none;
+      }
 
-        &.hideDesktopLegend .legendColumn {
-          display: none;
-        }
+      .legendColumnHeadings {
+        font-size: .9rem;
+        padding: 1px 17px 17px 30px;
+        display: flex;
+        flex-direction: column;
 
-        @media screen and (min-width: 992px) {
-          box-shadow: none;
-          border: none;
+        @media screen and (max-width: 360px) {
+          padding-top: 17px;
+          padding-left: 12px;
+          font-size: .75em;
           display: block;
-          margin-right: 20px;
-        }
-      }
-
-
-      .legendColumn {
-        position: fixed;
-        top: 72px;
-        box-shadow: none;
-        background-color: #eee;
-        border: 1px solid #000;
-
-        .legendTitle {
-          width: 57px;
-          height: 24.1px;
-          background-color: #eee;
         }
 
-        div {
-          border-bottom: 1px solid #000;
-          height: 23.9px;
+        @media screen and (min-width: 768px) {
+          padding: 10px 25px;
           display: flex;
-          justify-content: center;
-          align-items: center;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+          flex-grow: 1;
+          font-size: 1rem;
+        }
+
+        .lCHColumn {
+          padding-bottom: 20px;
+
+          .lCHContainer {
+            display: flex;
+
+            div:nth-child(1) {
+              min-width: 44px;
+              text-align: left;
+
+              @media screen and (min-width: 768px) {
+                min-width: 59px;
+              }
+            }
+
+            div:nth-child(2) {
+              text-align: left;
+            }
+
+            @media screen and (min-width: 768px) {
+              padding-bottom: 5px;
+            }
+          }
+
         }
       }
 
-
-      .team {
-        position: sticky;
-        left: 0;
-        z-index: 2;
-        border: 1px solid #333;
-        white-space: nowrap;
-        background-color: #fff;
+      [class^="topRank"],
+      [class^="botRank"] {
+        padding: 0px 5px;
+        height: auto;
+        border-right: 1px inset #000;
+        border-left: 1px inset #000;
+        border-bottom: 1px inset #000;
+        display: table-cell;
+        display: flex;
+        justify-content: center;
+        font-size: 0.7rem;
 
         @media screen and (min-width: 768px) {
           font-size: 1rem;
         }
-
-        &.active {
-          background-color: green;
-          color: white;
-          font-weight: bold;
-          margin: 3px 0;
-
-          @media screen and (min-width: 768px) {
-            width: 165px;
-            margin: 0;
-          }
-
-          a,
-          a:visited,
-          a:hover,
-          a:active,
-          a:focus {
-            color: #fff;
-            width: 80%;
-            display: inline-block;
-          }
-        }
-
-        a {
-          all: unset;
-          min-width: 0%;
-          cursor: pointer;
-
-          @media screen and (min-width: 768px) {
-            min-width: 90%;
-          }
-
-        }
-      }
-
-      .top {
-        position: sticky;
-        top: 0;
-        background-color: #ddd;
-        z-index: 1;
-        border: none;
-        cursor: pointer;
-
-        &.active {
-
-          a,
-          a:visited,
-          a:hover,
-          a:active,
-          a:focus {
-            color: #fff;
-          }
-        }
-      }
-
-
-    }
-
-    .left {
-      position: sticky;
-      text-align: center;
-
-      @media screen and (min-width: 768px) {
-        text-align: left;
-      }
-
-      left: 0;
-      background-color: #eee;
-      white-space: nowrap;
-    }
-  }
-
-  #popup-legend-modal {
-    position: fixed;
-    width: 91vw;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    text-align: center;
-    padding: 5px;
-    border: 1px solid #000;
-    overflow: auto;
-    z-index: 100;
-    display: flex;
-    flex-direction: row;
-
-    @media screen and (orientation: landscape) {
-      top: 57%;
-      height: 70vh;
-    }
-
-    @media screen and (min-width: 768px) {
-      top: 46%;
-      height: 72vh;
-      @media screen and (orientation: landscape) {
-        top: 53%;
-        height: 83vh;
-      }
-    }
-
-    @media screen and (min-width: 1200px) {
-      display: none;
-    }
-
-    .legendColumnHeadings {
-      font-size: .9rem;
-      padding: 1px 17px 17px 30px;
-      display: flex;
-      flex-direction: column;
-
-      @media screen and (max-width: 360px) {
-        padding-top: 17px;
-        padding-left: 12px;
-        font-size: .75em;
-        display: block;
-      }
-
-      @media screen and (min-width: 768px) {
-        padding: 10px 25px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        flex-grow: 1;
-        font-size: 1rem;
-      }
-      .lCHColumn {
-        padding-bottom: 20px;
-
-        .lCHContainer {
-          display: flex;
-
-          div:nth-child(1) {
-            min-width: 44px;
-            text-align: left;
-
-            @media screen and (min-width: 768px) {
-              min-width: 59px;
-            }
-          }
-
-          div:nth-child(2) {
-            text-align: left;
-          }
-
-          @media screen and (min-width: 768px) {
-            padding-bottom: 5px;
-          }
-        }
-
-      }
-    }
-
-    [class^="topRank"],
-    [class^="botRank"] {
-      padding: 0px 5px;
-      height: auto;
-      border-right: 1px inset #000;
-      border-left: 1px inset #000;
-      border-bottom: 1px inset #000;
-      display: table-cell;
-      display: flex;
-      justify-content: center;
-      font-size: 0.7rem;
-
-      @media screen and (min-width: 768px) {
-        font-size: 1rem;
       }
     }
   }
@@ -330,25 +334,6 @@ header {
   }
 }
 
-.ss {
-  display: none;
-
-  @media screen and (max-width: 576px) {
-    display: block;
-    letter-spacing: normal;
-  }
-}
-
-h1.sortsport,
-h1.ss {
-  display: none;
-  font-size: 1.3rem;
-  margin: 0;
-
-  @media screen and (min-width: 577px) {
-    display: block;
-  }
-}
 
 .brand {
   font-family: 'Courier New', Courier, monospace;
@@ -370,12 +355,32 @@ h1.ss {
   @media screen and (min-width: 1200px) {
     margin-left: 0;
   }
+
+  .sortsport {
+    font-size: 1.3rem;
+    margin: 0;
+
+    .home { display: none; 
+      @media screen and (min-width: 576px) {
+        display: block;
+      }
+    }
+
+    .ss {
+        display: none;
+
+        @media screen and (max-width: 576px) {
+          display: block;
+          letter-spacing: normal;
+        }
+      }
+  }
 }
 
 .diagonal-strike {
   position: relative;
-  right: 1px;
-  display: inline-block;
+  right: 0;
+  display: inline;
   transform: scaleX(0.8);
 }
 
@@ -419,6 +424,7 @@ h1.ss {
     padding: 3px 3px 0px 3px;
     border-radius: 5px;
     border: 1px solid #000;
+    background-color: #eee;
 
     .categorytext {
       display: none;
@@ -441,14 +447,13 @@ h1.ss {
 
   &:before {
     content: "";
-    background-image: url('/src/assets/images/batter.jpg');
+    background-image: url('/src/assets/images/bat_trans.jpg');
     display: inline-block;
     background-size: contain;
     width: 41px;
     height: 41px;
     background-repeat: no-repeat;
     background-position: 9px 0px;
-    background-color: #fff;
     border-radius: 5px;
 
     @media screen and (min-width: 768px) {
@@ -468,7 +473,8 @@ h1.ss {
     padding: 0;
 
     &:before {
-      background-position: 10px 2px;
+      background-position: 9px 0px;
+      opacity: .3;
     }
   }
 }
@@ -477,14 +483,13 @@ h1.ss {
 
   &:before {
     content: "";
-    background-image: url('/src/assets/images/pitcher.jpg');
+    background-image: url('/src/assets/images/pit_trans.jpg');
     display: inline-block;
     background-size: contain;
     width: 41px;
     height: 41px;
     background-repeat: no-repeat;
     background-position: 4px 2px;
-    background-color: #fff;
     border-radius: 5px;
 
     @media screen and (min-width: 768px) {
@@ -497,7 +502,7 @@ h1.ss {
     padding: 3px 3px 1px 3px;
 
     &:before {
-      background-position: 6px 1px;
+      background-position: 2px 2px;
     }
   }
 
@@ -507,7 +512,8 @@ h1.ss {
     padding: 0;
 
     &:before {
-      background-position: 8px 2px;
+      background-position: 2px 2px;
+      opacity: .3;
     }
   }
 }
@@ -620,7 +626,7 @@ h1.ss {
 }
 
 
-.App>table.bw {
+main > table.bw {
 
   .left {
     border-left: 1px solid #777;
@@ -636,6 +642,8 @@ h1.ss {
     background-color: #fff;
     color: #000;
     font-weight: normal;
+    text-shadow: none;
+    font-size: 1rem;
   }
 
   tbody tr.columnHeadings:first-child td.hideDesktopLegend {

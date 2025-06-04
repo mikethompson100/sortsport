@@ -95,9 +95,11 @@ function TeamsTable(props) {
       <header>
         <div className="headerLeft">
           <span className='brand'>
-            <span className="ss">S.S.</span>
             <h1 className="sortsport">
-              S<span className="diagonal-strike">O</span>RTSP<span className="diagonal-strike">O</span>RT
+              <a href="#">
+                <span className="home">S<span className="diagonal-strike">O</span>RTSP<span className="diagonal-strike">O</span>RT<span className="visually-hidden">home link</span></span>
+                <span className="ss" aria-label="Sortsport home link">S.S.</span>
+              </a>
             </h1>
           </span>
           <span>
@@ -106,8 +108,8 @@ function TeamsTable(props) {
         </div>
         <div className="headerCenter headerContainer">
           <div className={`season ${(isLegendActivated) ? 'dimmed' : ''}`}>
-            <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={`hitting ${group === "hitting" ? "active" : "inactive"}`}><span className="categorytext">Hitting</span></a>
-            <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={`pitching ${group === "pitching" ? "active" : "inactive"}`}><span className="categorytext">Pitching</span></a>
+            <a href="#" onClick={() => { setGroup("hitting"); setActiveColumn("Name"); }} className={`hitting ${group === "hitting" ? "active" : "inactive"}`}><span className="visually-hidden">button for changing the view to batting statistics</span><span className="categorytext">Hitting</span></a>
+            <a href="#" onClick={() => { setGroup("pitching"); setActiveColumn("Name"); }} className={`pitching ${group === "pitching" ? "active" : "inactive"}`}><span className="visually-hidden">button for changing the view to pitching statistics</span><span className="categorytext">Pitching</span></a>
           </div>
         </div>
         <div className="headerRight">
@@ -123,195 +125,200 @@ function TeamsTable(props) {
       </header>
       {props.result.loading && <p>Loading...</p>} {/* Show loading message */}
       {props.result.error && <p>Error: {props.result.error}</p>} {/* Show error message */}
-      {props.result.data && (group === "hitting") && ( /* Render data when available */
-        <table className={colorful ? "" : "bw"}>
-          <tbody>
-            <tr className="columnHeadings">
-              <td className={colorful ? "" : "hideDesktopLegend"}>
-                <div className="legendColumn">
-                  <div className="legendTitle">Ranks</div>
-                  <div className="topRank1">1</div>
-                  <div className="topRank2to5">2</div>
-                  <div className="topRank2to5">3</div>
-                  <div className="topRank2to5">4</div>
-                  <div className="topRank2to5">5</div>
-                  <div className="topRank6to10">6</div>
-                  <div className="topRank6to10">7</div>
-                  <div className="topRank6to10">8</div>
-                  <div className="topRank6to10">9</div>
-                  <div className="topRank6to10">10</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div className="botRank6to10">20</div>
-                  <div className="botRank6to10">21</div>
-                  <div className="botRank6to10">22</div>
-                  <div className="botRank6to10">23</div>
-                  <div className="botRank6to10">24</div>
-                  <div className="botRank2to5">25</div>
-                  <div className="botRank2to5">26</div>
-                  <div className="botRank2to5">27</div>
-                  <div className="botRank2to5">28</div>
-                  <div className="botRank2to5">29</div>
-                  <div className="botRank1">30</div>
-                </div>
-              </td>
-              <td className={nameClass}>
-                <a href="#" onClick={(e) => { e.preventDefault(); handleColumnClick("Name") }}>Team:</a>{chevron}
-              </td>
-              {allHittingColumns.map(element => {
+      <main>
+        {props.result.data && (group === "hitting") && ( /* Render data when available */
+          <table className={colorful ? "" : "bw"}>
+            <tbody>
+              <tr className="columnHeadings">
+                <td className={colorful ? "" : "hideDesktopLegend"}>
+                  <aside className="legendColumn">
+                    <div className="legendTitle">Ranks</div>
+                    <div className="topRank1">1</div>
+                    <div className="topRank2to5">2</div>
+                    <div className="topRank2to5">3</div>
+                    <div className="topRank2to5">4</div>
+                    <div className="topRank2to5">5</div>
+                    <div className="topRank6to10">6</div>
+                    <div className="topRank6to10">7</div>
+                    <div className="topRank6to10">8</div>
+                    <div className="topRank6to10">9</div>
+                    <div className="topRank6to10">10</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div className="botRank6to10">20</div>
+                    <div className="botRank6to10">21</div>
+                    <div className="botRank6to10">22</div>
+                    <div className="botRank6to10">23</div>
+                    <div className="botRank6to10">24</div>
+                    <div className="botRank2to5">25</div>
+                    <div className="botRank2to5">26</div>
+                    <div className="botRank2to5">27</div>
+                    <div className="botRank2to5">28</div>
+                    <div className="botRank2to5">29</div>
+                    <div className="botRank1">30</div>
+                  </aside>
+                </td>
+                <td className={nameClass}>
+                  <a href="#" onClick={(e) => { e.preventDefault(); handleColumnClick("Name") }}>Team:</a>{chevron}
+                </td>
+                {allHittingColumns.map(element => {
+                  return (
+                    <TeamsTableHeading
+                      title={element.title}
+                      activeColumn={activeColumn}
+                      ascend={element.ascend}
+                      handleColumnClick={handleColumnClick}
+                      flipDefault={flipDefault}
+                    />
+                  )
+                })}
+              </tr>
+              {renderArray.map(record => {
+
                 return (
-                  <TeamsTableHeading
-                    title={element.title}
-                    activeColumn={activeColumn}
-                    ascend={element.ascend}
-                    handleColumnClick={handleColumnClick}
-                    flipDefault={flipDefault}
-                  />
+                  <tr key={record.team.id}>
+                    <td className="legendColumn"></td>
+                    <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
+                    {allHittingColumns.map((column) => {
+                      return (
+                        <StatCell
+                          key={column.name}
+                          stats={record.hitting}
+                          column={column}
+                          allDataSorted={renderArray}
+                          group={group}
+                        />
+                      )
+                    })}
+                  </tr>
+                )
+
+              })}
+            </tbody>
+          </table>
+        )}
+        {props.result.data && (group === "pitching") && ( /* Render data when available */
+          <table className={colorful ? "" : "bw"}>
+            <tbody>
+              <tr className="columnHeadings">
+                <td className={colorful ? "" : "hideDesktopLegend"}>
+                  <aside className="legendColumn">
+                    <div className="legendTitle">Ranks</div>
+                    <div className="topRank1">1</div>
+                    <div className="topRank2to5">2</div>
+                    <div className="topRank2to5">3</div>
+                    <div className="topRank2to5">4</div>
+                    <div className="topRank2to5">5</div>
+                    <div className="topRank6to10">6</div>
+                    <div className="topRank6to10">7</div>
+                    <div className="topRank6to10">8</div>
+                    <div className="topRank6to10">9</div>
+                    <div className="topRank6to10">10</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div className="botRank6to10">20</div>
+                    <div className="botRank6to10">21</div>
+                    <div className="botRank6to10">22</div>
+                    <div className="botRank6to10">23</div>
+                    <div className="botRank6to10">24</div>
+                    <div className="botRank2to5">25</div>
+                    <div className="botRank2to5">26</div>
+                    <div className="botRank2to5">27</div>
+                    <div className="botRank2to5">28</div>
+                    <div className="botRank2to5">29</div>
+                    <div className="botRank1">30</div>
+                  </aside>
+                </td>
+                <td className={nameClass}>
+                  <a href="#" onClick={(e) => handleColumnClick("Name")}>Team:</a>{chevron}
+                </td>
+                {allPitchingColumns.map(element => {
+                  return (
+                    <TeamsTableHeading
+                      title={element.title}
+                      activeColumn={activeColumn}
+                      ascend={element.ascend}
+                      handleColumnClick={handleColumnClick}
+                      flipDefault={flipDefault}
+                    />
+                  )
+                })}
+              </tr>
+              {renderArray.map(record => {
+
+                return (
+                  <tr key={record.team.id}>
+                    <td className="legendColumn"></td>
+                    <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
+                    {allPitchingColumns.map((column) => {
+                      return (
+                        <StatCell
+                          key={column.name}
+                          stats={record.pitching}
+                          column={column}
+                          allDataSorted={renderArray}
+                          group={group}
+                        />
+                      )
+                    })}
+                  </tr>
                 )
               })}
-            </tr>
-            {renderArray.map(record => {
+            </tbody>
+          </table>
+        )}
+        {isLegendShown && isLegendActivated && (
+          <div id="popup-legend-modal">
+            <div>
+              <span><strong>Ranks</strong></span>
+              <div className="topRank1">1</div>
+              <div className="topRank2to5">2</div>
+              <div className="topRank2to5">3</div>
+              <div className="topRank2to5">4</div>
+              <div className="topRank2to5">5</div>
+              <div className="topRank6to10">6</div>
+              <div className="topRank6to10">7</div>
+              <div className="topRank6to10">8</div>
+              <div className="topRank6to10">9</div>
+              <div className="topRank6to10">10</div>
+              <div className="topRank botRank">...</div>
+              <div className="topRank botRank">...</div>
+              <div className="topRank botRank">...</div>
+              <div className="topRank botRank">...</div>
+              <div className="topRank botRank">...</div>
+              <div className="topRank botRank">...</div>
+              <div className="topRank botRank">...</div>
+              <div className="topRank botRank">...</div>
+              <div className="topRank botRank">...</div>
+              <div className="botRank6to10">20</div>
+              <div className="botRank6to10">21</div>
+              <div className="botRank6to10">22</div>
+              <div className="botRank6to10">23</div>
+              <div className="botRank6to10">24</div>
+              <div className="botRank2to5">25</div>
+              <div className="botRank2to5">26</div>
+              <div className="botRank2to5">27</div>
+              <div className="botRank2to5">28</div>
+              <div className="botRank2to5">29</div>
+              <div className="botRank1">30</div>
+            </div>
 
-              return (
-                <tr key={record.team.id}>
-                  <td className="legendColumn"></td>
-                  <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
-                  {allHittingColumns.map((column) => {
-                    return (
-                      <StatCell
-                        key={column.name}
-                        stats={record.hitting}
-                        column={column}
-                      />
-                    )
-                  })}
-                </tr>
-              )
-
-            })}
-          </tbody>
-        </table>
-      )}
-      {props.result.data && (group === "pitching") && ( /* Render data when available */
-        <table className={colorful ? "" : "bw"}>
-          <tbody>
-            <tr className="columnHeadings">
-              <td className={colorful ? "" : "hideDesktopLegend"}>
-                <div className="legendColumn">
-                  <div className="legendTitle">Ranks</div>
-                  <div className="topRank1">1</div>
-                  <div className="topRank2to5">2</div>
-                  <div className="topRank2to5">3</div>
-                  <div className="topRank2to5">4</div>
-                  <div className="topRank2to5">5</div>
-                  <div className="topRank6to10">6</div>
-                  <div className="topRank6to10">7</div>
-                  <div className="topRank6to10">8</div>
-                  <div className="topRank6to10">9</div>
-                  <div className="topRank6to10">10</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div>...</div>
-                  <div className="botRank6to10">20</div>
-                  <div className="botRank6to10">21</div>
-                  <div className="botRank6to10">22</div>
-                  <div className="botRank6to10">23</div>
-                  <div className="botRank6to10">24</div>
-                  <div className="botRank2to5">25</div>
-                  <div className="botRank2to5">26</div>
-                  <div className="botRank2to5">27</div>
-                  <div className="botRank2to5">28</div>
-                  <div className="botRank2to5">29</div>
-                  <div className="botRank1">30</div>
-                </div>
-              </td>
-              <td className={nameClass}>
-                <a href="#" onClick={(e) => handleColumnClick("Name")}>Team:</a>{chevron}
-              </td>
-              {allPitchingColumns.map(element => {
-                return (
-                  <TeamsTableHeading
-                    title={element.title}
-                    activeColumn={activeColumn}
-                    ascend={element.ascend}
-                    handleColumnClick={handleColumnClick}
-                    flipDefault={flipDefault}
-                  />
-                )
-              })}
-            </tr>
-            {renderArray.map(record => {
-
-              return (
-                <tr key={record.team.id}>
-                  <td className="legendColumn"></td>
-                  <td className="left">{isMobile ? getAbbrev(record.team.name) : record.team.name}</td>
-                  {allPitchingColumns.map((column) => {
-                    return (
-                      <StatCell
-                        key={column.name}
-                        stats={record.pitching}
-                        column={column}
-                      />
-                    )
-                  })}
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      )}
-      {isLegendShown && isLegendActivated && (
-        <div id="popup-legend-modal">
-          <div>
-            <span><strong>Ranks</strong></span>
-            <div className="topRank1">1</div>
-            <div className="topRank2to5">2</div>
-            <div className="topRank2to5">3</div>
-            <div className="topRank2to5">4</div>
-            <div className="topRank2to5">5</div>
-            <div className="topRank6to10">6</div>
-            <div className="topRank6to10">7</div>
-            <div className="topRank6to10">8</div>
-            <div className="topRank6to10">9</div>
-            <div className="topRank6to10">10</div>
-            <div className="topRank botRank">...</div>
-            <div className="topRank botRank">...</div>
-            <div className="topRank botRank">...</div>
-            <div className="topRank botRank">...</div>
-            <div className="topRank botRank">...</div>
-            <div className="topRank botRank">...</div>
-            <div className="topRank botRank">...</div>
-            <div className="topRank botRank">...</div>
-            <div className="topRank botRank">...</div>
-            <div className="botRank6to10">20</div>
-            <div className="botRank6to10">21</div>
-            <div className="botRank6to10">22</div>
-            <div className="botRank6to10">23</div>
-            <div className="botRank6to10">24</div>
-            <div className="botRank2to5">25</div>
-            <div className="botRank2to5">26</div>
-            <div className="botRank2to5">27</div>
-            <div className="botRank2to5">28</div>
-            <div className="botRank2to5">29</div>
-            <div className="botRank1">30</div>
-          </div>
-
-          <div className="legendColumnHeadings">
-            <div className="lCHColumn">
+            <div className="legendColumnHeadings">
+              <div className="lCHColumn">
                 <div className="lCHContainer"><strong>Hitting</strong></div>
                 <div className="lCHContainer"><div>Runs</div><div>= Runs</div></div>
                 <div className="lCHContainer"><div>Hit</div><div>= Hits</div></div>
@@ -327,8 +334,8 @@ function TeamsTable(props) {
                 <div className="lCHContainer"><div>Go</div><div>= Groundouts</div></div>
                 <div className="lCHContainer"><div>Ao</div><div>= Airouts</div></div>
                 <div className="lCHContainer"><div>Gidp</div><div>= Ground into Double Plays</div></div>
-            </div>
-            <div className="lCHColumn">
+              </div>
+              <div className="lCHColumn">
                 <div className="lCHContainer"><strong>Pitching</strong></div>
                 <div className="lCHContainer"><div>Era</div><div>= Earned Run Average</div></div>
                 <div className="lCHContainer"><div>Runs</div><div>= Runs given up</div></div>
@@ -344,10 +351,11 @@ function TeamsTable(props) {
                 <div className="lCHContainer"><div>Cs</div><div>= Caught Stealing</div></div>
                 <div className="lCHContainer"><div>SbP</div><div>= Stolen base percentage</div></div>
                 <div className="lCHContainer"><div>Gidp</div><div>= Ground into Double Plays</div></div>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </main>
     </>
   );
 }

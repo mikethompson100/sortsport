@@ -59,9 +59,15 @@ td {
 }
 
 .topRank1 {
-  background-color: red;
+  background-color: red;        
   transition: background-color 1s ease;
   color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px #000;
+  font-size: 1rem;
+  @media screen and (min-width: 768px) {
+    font-size: 1.2rem;
+  }
 }
 
 .topRank2to5 {

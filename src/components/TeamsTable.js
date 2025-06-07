@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import StatCell from './StatCell';
 import TeamsTableHeading from './TeamsTableHeading';
 import useIsMobile from "../hooks/useIsMobile";
+import useIs1200 from "../hooks/useIs1200";
 import { allHittingColumns, allPitchingColumns, teamAbbrevs } from '../constants/constants';
+
 
 function TeamsTable(props) {
   const [activeColumn, setActiveColumn] = useState("Name"); // State to set by which column the data is sorted
@@ -11,8 +13,24 @@ function TeamsTable(props) {
   const [flipDefault, setFlipDefault] = useState(false);
   const [colorful, setColorful] = useState(true);
   const isMobile = useIsMobile();
+  const is1200 = useIs1200();
   const [isLegendActivated, setIsLegendActivated] = useState(false);
   const isLegendShown = !isMobile || isLegendActivated;
+  const closeRef = useRef();
+  const infoRef = useRef();
+
+  useEffect(() => {
+    if (isLegendActivated) {
+      closeRef.current?.focus();
+    }
+    else { infoRef.current?.focus(); }
+  }, [isLegendActivated]);
+
+  useEffect(() => {
+    if (is1200) {
+      setIsLegendActivated(false);
+    }
+  }, [is1200]);
 
   if (props.result.loading) {
     return <div>Loading...</div>;
@@ -91,16 +109,11 @@ function TeamsTable(props) {
   // Render the component
   return (
     <>
-      <div id="modal-root" className={`${(isLegendActivated) ? 'opacity-50' : 'opacity-0'}`}></div>
+      {isLegendActivated && <div id="modal-root" onClick={() => setIsLegendActivated(false)} className="opacity-50"></div>}
       <header>
         <div className="headerLeft">
           <span className='brand'>
-            <h1 className="sortsport">
-              <a href="#">
-                <span className="home">S<span className="diagonal-strike">O</span>RTSP<span className="diagonal-strike">O</span>RT<span className="visually-hidden">home link</span></span>
-                <span className="ss" aria-label="Sortsport home link">S.S.</span>
-              </a>
-            </h1>
+            <h1 className="sortsport"></h1>
           </span>
           <span>
             {isMobile ? "'" + String(props.result.data[0].season).slice(-2) : props.result.data[0].season}<span className="description">season</span>
@@ -114,7 +127,7 @@ function TeamsTable(props) {
         </div>
         <div className="headerRight">
           <div className={`legend-toggle ${isLegendActivated ? 'legend-button-highlighted' : ''}`}>
-            <a id="legend-button" href="#" onClick={() => { setIsLegendActivated(!isLegendActivated); }}><i className="bi bi-info-circle"></i><span className='visually-hidden'>Toggle link to show or hide color legend popup</span></a>
+            <a id="legend-button" ref={infoRef} href="#" onClick={() => { setIsLegendActivated(!isLegendActivated); }}><i className="bi bi-info-circle"></i><span className='visually-hidden'>Toggle link to show or hide color legend popup that includes column heading descriptions</span></a>
           </div>
           {!colorful && <div id="color-button" className={`bi bi-circle-half ${(isLegendActivated) ? 'dimmed' : ''}`}><a href="#" onClick={() => { setColorful(!colorful); }}><span className='visually-hidden'>Toggle link to turn on or off the color palette mode</span></a></div>
           }
@@ -283,6 +296,7 @@ function TeamsTable(props) {
         )}
         {isLegendShown && isLegendActivated && (
           <div id="popup-legend-modal">
+            <a href="#" ref={closeRef} onClick={() => setIsLegendActivated(false)} className="closeButton bi bi-x"></a>
             <div>
               <span><strong>Ranks</strong></span>
               <div className="topRank1">1</div>

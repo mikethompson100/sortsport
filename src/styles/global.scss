@@ -59,12 +59,13 @@ td {
 }
 
 .topRank1 {
-  background-color: red;        
+  background-color: red;
   transition: background-color 1s ease;
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px #000;
   font-size: 1rem;
+
   @media screen and (min-width: 768px) {
     font-size: 1.2rem;
   }
@@ -105,6 +106,7 @@ td {
     }
   }
 }
+
 .visually-hidden {
   position: absolute !important;
   width: 1px !important;
@@ -115,4 +117,11 @@ td {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+a:focus,
+button:focus {
+  border-radius: 5px;
+  outline: 2px dashed #0a4386 !important;
+  
 }

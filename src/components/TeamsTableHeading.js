@@ -9,7 +9,7 @@ export default function TeamsTableHeading(props) {
 
   return (
     <td className={className}>
-      <a href="#" onClick={(e) => props.handleColumnClick(props.title)} title={props.title}>
+      <a href="#" onClick={(e) => props.handleColumnClick(props.title)}>
         {props.title}
         {chevron}
       </a>
